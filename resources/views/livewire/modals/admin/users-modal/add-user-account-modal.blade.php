@@ -315,7 +315,6 @@
                                             :type="isPasswordVisible ? 'text' : 'password'"
                                             wire:model="form.password"
                                             placeholder="Generated password will appear here"
-                                            readonly
                                             class="border border-gray-300 focus:outline-none focus:ring-[0.5px] focus:ring-[#4AA76F] focus:border-[#4AA76F] mt-1 block w-full rounded-sm shadow-sm sm:text-sm bg-gray-100 pr-10">
                                         <!-- Eye Icon for Toggling -->
                                         <button

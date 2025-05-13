@@ -76,11 +76,9 @@ class User extends Authenticatable
         'name',
     ];
 
-//    public static function where(string $string, string $string1) {}
+    //    public static function where(string $string, string $string1) {}
 
-    public function profilePhotos()
-    {
-    }
+    public function profilePhotos() {}
 
     /**
      * Get the attributes that should be cast.
@@ -103,14 +101,14 @@ class User extends Authenticatable
             // Decrypt the names
             $firstName = Crypt::decryptString($this->first_name);
             $lastName = Crypt::decryptString($this->last_name);
-            
+
             // Handle middle name if it exists
             $middleInitial = '';
             if (!empty($this->middle_name)) {
                 $decryptedMiddleName = Crypt::decryptString($this->middle_name);
                 $middleInitial = !empty($decryptedMiddleName) ? $decryptedMiddleName[0] . '.' : '';
             }
-            
+
             return "$firstName $middleInitial $lastName";
         } catch (\Exception $e) {
             // Fallback in case decryption fails
@@ -133,7 +131,14 @@ class User extends Authenticatable
         }
 
         // Check the gender and return the appropriate default image
-        return $this->sex === 'female'
+        try {
+            $decryptedSex = Crypt::decryptString($this->sex);
+        } catch (\Exception $e) {
+            Log::error('Error decrypting user sex: ' . $e->getMessage());
+            $decryptedSex = 'male'; // fallback default
+        }
+
+        return $decryptedSex === 'female'
             ? asset('storage/icons/profile2-graphics.png')
             : asset('storage/icons/profile-graphics.png');
     }
@@ -172,7 +177,7 @@ class User extends Authenticatable
 
     public function userTypes(): BelongsTo
     {
-        return $this->belongsTo(UserType::class, 'user_type' );
+        return $this->belongsTo(UserType::class, 'user_type');
     }
 
     public function staffRolesPermissions(): BelongsTo
@@ -181,10 +186,10 @@ class User extends Authenticatable
     }
 
 
-//    public function staffRole(): BelongsTo
-//    {
-//        return $this->belongsTo(StaffRole::class, 'staff_role_id');
-//    }
+    //    public function staffRole(): BelongsTo
+    //    {
+    //        return $this->belongsTo(StaffRole::class, 'staff_role_id');
+    //    }
 
     public function permissions(): BelongsToMany
     {
@@ -208,9 +213,9 @@ class User extends Authenticatable
     }
 
 
-//    public function admin_notifications(): HasMany
-//    {
-//        return $this->hasMany(Notification::class, 'admin_user_id', 'id');
-//    }
+    //    public function admin_notifications(): HasMany
+    //    {
+    //        return $this->hasMany(Notification::class, 'admin_user_id', 'id');
+    //    }
 
 }

@@ -27,8 +27,8 @@
 
             <x-slot:table_container wire:key="reports-table-{{ now() }}">
                 <div
-                    class="inline-block w-[50vh] md:w-full lg:w-full h-[50vh] md:h-[52vh] lg:h-[55vh] xl:h-[62vh] xl:max-h-[100vh] overflow-y-auto align-middle drop-shadow rounded-b-md">
-                    <table class="w-auto md:w-full text-left divide-y divide-gray-300">
+                   class="inline-block w-[40vh] md:w-full lg:w-full h-[50vh] md:h-[52vh] lg:h-[55vh] xl:h-[62vh] xl:max-h-[100vh] overflow-y-auto align-middle drop-shadow rounded-b-md">
+                    <table class="w-[100px] md:w-full text-left divide-y divide-gray-300">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"

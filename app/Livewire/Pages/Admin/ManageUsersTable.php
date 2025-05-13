@@ -250,19 +250,22 @@ protected function paginateCollection($items, $perPage)
 {
     // Get current page from query string or default to 1
     $page = request()->input('page', 1);
-
+    
+    // Store the total count before slicing
+    $totalCount = $items->count();
+    
     // Slice the collection to get the items to display in current page
     $items = $items->slice(($page - 1) * $perPage, $perPage)->values();
-
+    
     // Create our paginator and pass it to the view
     $paginated = new \Illuminate\Pagination\LengthAwarePaginator(
         $items,
-        $items->count(), // Total items
+        $totalCount, // Use the total count before slicing
         $perPage,
         $page,
         ['path' => request()->url(), 'query' => request()->query()]
     );
-
+    
     return $paginated;
 }
 }

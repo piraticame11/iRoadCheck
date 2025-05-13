@@ -16,7 +16,7 @@ class Staff extends Model
         'user_id',
         'staff_role',
         // 'generated password',
-        'status'
+        'status',
     ];
 
     protected $hidden = [

@@ -151,16 +151,12 @@ class ProfileEdit extends Component
             throw new \Exception('Authenticated user is not an instance of User model.');
         }
 
-        // Decrypt phone number for proper comparison
-        $decryptedPhone = Crypt::decryptString($user->phone);
-
         // Determine what needs to be updated
         $isPasswordChanged = !empty($this->password);
-        $isPhoneChanged = !empty($this->phone) && $decryptedPhone !== $this->phone;
         $isCurrentPasswordFilled = !empty($this->current_password);
 
         // If no changes are detected, reset the form and show a message
-        if (!$isPasswordChanged && !$isPhoneChanged && $isCurrentPasswordFilled) {
+        if (!$isPasswordChanged && $isCurrentPasswordFilled) {
             $this->resetForm();
             session(['hideSearchBar' => true]); // Hide search bar
             session()->flash('feedback', 'No changes were made to your account information.');
@@ -169,8 +165,7 @@ class ProfileEdit extends Component
         }
 
         // If no actual changes to phone, or password
-        if (!$isPasswordChanged && !$isPhoneChanged) {
-            $this->phone = $decryptedPhone;
+        if (!$isPasswordChanged) {
             $this->resetForm();
             session(['hideSearchBar' => true]); // Hide search bar
             session()->flash('feedback', 'No changes were made to your account information.');
@@ -180,13 +175,6 @@ class ProfileEdit extends Component
 
         // Prepare validation rules dynamically
         $rules = ['current_password' => ['required', 'string']]; // Current password is always required
-
-        if ($isPhoneChanged) {
-            $rules['phone'] = [
-                'regex:/^0\d{10}$/',
-                'unique:users,phone,' . $user->id
-            ];
-        }
 
         if ($isPasswordChanged) {
             $rules['password'] = [
@@ -203,8 +191,6 @@ class ProfileEdit extends Component
 
         // Validate input data
         $validatedData = $this->validate($rules, [
-            'phone.regex' => 'Phone number must be a valid Philippine phone number (e.g., 09123456789).',
-            'phone.unique' => 'The phone number is already in use. Please use a different one.',
             'current_password.required' => 'The current password is required to update your account information.',
             'password.required' => 'Password is required.',
             'password.confirmed' => 'The password confirmation does not match.',
@@ -230,15 +216,11 @@ class ProfileEdit extends Component
         if ($isPasswordChanged) {
             $user->password = Hash::make($this->password);
         }
-        if ($isPhoneChanged) {
-            $user->phone = Crypt::encryptString(preg_replace('/^0/', '+63', $this->phone));
-        }
 
         $user->save(); // Save changes to the database
         $user->refresh();
 
         // Reset the form fields
-        $this->phone = Crypt::decryptString($user->phone);
         $this->resetForm();
 
         // Provide feedback to the user

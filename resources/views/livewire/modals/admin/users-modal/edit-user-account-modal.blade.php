@@ -325,7 +325,7 @@
                                 <input wire:model.live="form.username"
                                     placeholder="Username"
                                     type="text"
-                                    class="border-gray-300 focus:ring-[#4AA76F] focus:border-[#4AA76F] block w-full rounded-sm shadow-sm capitalize">
+                                    class="border-gray-300 focus:ring-[#4AA76F] focus:border-[#4AA76F] block w-full rounded-sm shadow-sm">
                                 @error('form.username') <span class="text-red-600 text-xs flex justify-center text-center">{{ $message }}</span> @enderror
                             </div>
 
@@ -338,7 +338,6 @@
                                             :type="isPasswordVisible ? 'text' : 'password'"
                                             wire:model.live="form.password"
                                             placeholder="Generated password will appear here"
-                                            readonly
                                             class="border border-gray-300 focus:ring-[#4AA76F] focus:border-[#4AA76F] mt-1 block w-full rounded-sm shadow-sm sm:text-sm bg-gray-100">
                                         <!-- Eye Icon for Toggling -->
                                         <button

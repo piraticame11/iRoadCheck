@@ -100,19 +100,26 @@
                     Birthdate
                 </label>
                 <div x-data="{
-                init() {
-                    flatpickr($refs.input, {
-                        dateFormat: 'F j, Y',
-                        defaultDate: @js($this->date_of_birth) ?? null,
-                        onChange: (_, dateStr) => @this.set('date_of_birth', dateStr),
-                    });
-                }
-            }"
-                     x-init="init"
-                     class="relative w-full lg:w-7/10 custom-date-input">
-                    <input id="date_of_birth" type="text" x-ref="input" wire:model.defer="date_of_birth" placeholder="Select your birthdate"
-                           readonly
-                           class="appearance-none border border-gray-300 focus:ring-[0.5px] focus:ring-[#4AA76F] focus:border-[#4AA76F] w-full rounded-md bg-white text-[14px] text-gray-900 shadow">
+                 init() {
+                        flatpickr($refs.input, {
+                            dateFormat: 'F j, Y',
+                            defaultDate: @js($this->date_of_birth) ?? null,
+                            allowInput: true, // 
+                            onChange: (_, dateStr) => {
+                                @this.set('date_of_birth', dateStr);
+                            },
+                            onClose: function(selectedDates, dateStr) {
+                                // If the user typed a valid date manually and tabs out, sync it too
+                                @this.set('date_of_birth', dateStr);
+                            }
+                        });
+                    }
+                }" x-init="init" class="relative w-full lg:w-7/10 custom-date-input"
+                    wire:ignore>
+                    <input id="date_of_birth" type="text" x-ref="input"
+                        value="{{ old('date_of_birth', $this->date_of_birth) }}"
+                        placeholder="Select or type your birthdate"
+                        class="appearance-none border border-gray-300 focus:ring-[0.5px] focus:ring-[#4AA76F] focus:border-[#4AA76F] w-full rounded-md bg-white text-[14px] text-gray-900 shadow">
                 </div>
             </div>
         </x-slot:birthdate>

@@ -68,7 +68,7 @@ class ResidentSignup extends Component
 
         // Validate phone format before checking if it exists
         if (!preg_match('/^0[0-9]{10}$/', $this->phone)) {
-            $this->phoneError = 'Please enter a valid 11-digit phone number starting with 0';
+            $this->phoneError = 'Please enter a valid 11-digit phone number starting with 09';
             Log::warning('Invalid phone format', ['phone' => $this->phone]);
             return false;
         }

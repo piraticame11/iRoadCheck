@@ -19,7 +19,7 @@
                 </div>
             </div>
             <!-- Desktop view of preview names and user type -->
-            <div class="relative text-start text-[#4D4F50] ml-6 -mt-[90px] hidden lg:block">
+            <div class="relative text-start text-white ml-6 -mt-[90px] hidden lg:block">
                 {{ $preview_names_and_user_type }}
             </div>
         </div>

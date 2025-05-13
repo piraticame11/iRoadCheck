@@ -215,7 +215,6 @@
                 <div class="space-y-4 my-6">
 
                     <!--Phone Number-->
-                    <!--Phone Number-->
                     <div class="relative">
                         <input name="phone" type="tel" id="phone" required pattern="0[0-9]{10}"  autocomplete="off"
                             maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);"
@@ -229,7 +228,7 @@
                     </div>
                     <!-- Show format error OR Livewire error -->
                     <p x-show="errors.phone" class="text-red-500 text-[12px] mt-1">Please enter a valid 11-digit phone
-                        number starting with 0</p>
+                        number starting with 09</p>
                     <p x-show="!errors.phone && @this.phoneError" class="text-red-500 text-[12px] mt-1">
                         {{ $phoneError }}</p>
 

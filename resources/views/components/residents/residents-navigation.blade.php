@@ -28,7 +28,7 @@
                                 'border-2 border-customGreen rounded-full': openDropdown
                              }">
                             <img src="{{ Auth::user()->profile_picture_url }}" alt="Profile Image"
-                                 class="w-8 h-8 rounded-full hover:bg-customGreen
+                                 class="w-8 h-8 rounded-full hover:bg-customGreen object-cover
                                 {{ request()->routeIs('profile-info') ? 'border-2 border-customGreen bg-customGreen' : 'border border-gray-400' }}">
                         </div>
                     </a>
@@ -114,7 +114,7 @@
                         </p>
                     </a>
 
-                    <!-- Suggestion Reports -->
+                    {{-- <!-- Suggestion Reports -->
                     <a href="{{ route('suggestion-reports') }}" wire:navigate
                        class="group mx-2 flex items-center block py-2.5 px-4 rounded font-medium text-[#4D4F50] hover:text-[#4AA76F] hover:bg-gray-50 hover:shadow-md
                            {{ request()->routeIs('suggestion-reports') ? 'bg-[#4AA76F] text-white shadow-md font-bold' : '' }}">
@@ -131,7 +131,7 @@
                             {{ request()->routeIs('suggestion-reports') ? 'text-white' : 'text-[#4D4F50] group-hover:text-[#4AA76F] group-hover:font-semibold duration-200 ease-in-out' }}">
                             Suggestion Reports
                         </p>
-                    </a>
+                    </a> --}}
 
                     <!-- Report History -->
                     <a href="{{ route('resident.report-history') }}" wire:navigate
@@ -157,7 +157,7 @@
 
             <!-- Mobile screens Navigation tab -->
             <div x-cloak="true"
-                class="mx-auto fixed pl-0 pr-4 bottom-0 gap-x-10 xxs:gap-x-8 xs:gap-x-10 sm:gap-x-14 md:gap-x-24 lg:hidden left-0 right-0 bg-white shadow-[0px_5px_40px_rgba(0,0,0,0.5)] flex justify-center items-center sm:py-2 py-2 sm:rounded-2xl w-[100%] sm:w-[82%] sm:mb-2 z-50">
+                class="mx-auto fixed pl-0 pr-4 bottom-0 gap-x-16 xxs:gap-x-12 xs:gap-x-10 sm:gap-x-14 md:gap-x-24 lg:hidden left-0 right-0 bg-white shadow-[0px_5px_40px_rgba(0,0,0,0.5)] flex justify-center items-center sm:py-2 py-2 sm:rounded-2xl w-[100%] sm:w-[82%] sm:mb-2 z-50">
 
                 <!-- Dashboard -->
                 <a href="{{ route('resident.dashboard') }}" wire:navigate
@@ -226,7 +226,7 @@
                     </div>
                 </a>
                 <!-- Suggestion Reports -->
-                <a href="{{ route('suggestion-reports') }}" wire:navigate
+                {{-- <a href="{{ route('suggestion-reports') }}" wire:navigate
                    class="group relative flex flex-col items-center transition-all duration-300 [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] active:-translate-y-1 active:scale-x-90 active:scale-y-110">
 
                     <!-- Wave Shape -->
@@ -252,7 +252,7 @@
                             Suggestions
                         </span>
                     </div>
-                </a>
+                </a> --}}
 
                 <!-- Report History -->
                 <a href="{{ route('resident.report-history') }}" wire:navigate
