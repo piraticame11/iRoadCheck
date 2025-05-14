@@ -3,11 +3,16 @@
 namespace App\Livewire;
 
 use AllowDynamicProperties;
+use App\Models\Notification;
 use App\Models\Report;
+use App\Models\Staff;
 use App\Models\Suggestion;
 use App\Models\TemporaryUpdate;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 #[AllowDynamicProperties] class ReviewUpdate extends Component
@@ -103,15 +108,73 @@ use Livewire\Component;
                     'status' => $selectedStatus,
                 ]);
 
-            DB::commit();
             session()->flash('feedback', 'Report submitted successfully!');
             session()->flash('feedback_type', 'success');
         $this->isOpen = false;
+
+
+
+            try {
+                $reporter = Auth::user();
+                if (!$reporter) {
+                    throw new \Exception('Authenticated user not found.');
+                }
+            } catch (\Exception $e) {
+                throw new \Exception('Error retrieving reporter: ' . $e->getMessage());
+            }
+
+            try {
+                $admins = User::where('user_type', 1)->get();
+                $staff = Staff::with('user')->get();
+
+                if ($admins->isEmpty() && $staff->isEmpty()) {
+                    throw new \Exception('No admins or staff found.');
+                }
+            } catch (\Exception $e) {
+                throw new \Exception('Error fetching admins/staff: ' . $e->getMessage());
+            }
+
+            try {
+                $firstName = Crypt::decryptString($reporter->first_name);
+                $lastName = Crypt::decryptString($reporter->last_name);
+            } catch (\Exception $e) {
+                $firstName = '[Unknown]';
+                $lastName = '';
+            }
+
+            $notificationData = [
+                'title' => 'Report Updated',
+                'message' => "A report has been updated by {$firstName} {$lastName} at {$temporaryUpdate->location}.",
+                'is_read' => false,
+            ];
+
+            try {
+                $this->notifyUsers($admins, $notificationData, User::class);
+
+                if ($reporter->user_type !== 3) {
+                    $this->notifyUsers($staff, $notificationData, Staff::class);
+                }
+            } catch (\Exception $e) {
+                Log::warning('Notification to admin/staff failed: ' . $e->getMessage());
+            }
+
+            try {
+                Notification::create([
+                    'title' => 'Report Updated',
+                    'message' => "A report has been updated by {$firstName} {$lastName} at {$temporaryUpdate->location}.",
+                    'notifiable_id' => $reporter->id,
+                    'notifiable_type' => User::class,
+                    'is_read' => false,
+                ]);
+            } catch (\Exception $e) {
+                Log::warning('Notification to reporter failed: ' . $e->getMessage());
+            }
+
+            DB::commit();
             $temporaryUpdate->delete();
             return $this->redirect('/staff/capture-road-defect', navigate: true);
 
         } catch (\Exception $e) {
-            dd('Something went wrong while updating the report.');
             DB::rollBack();
             session()->flash('error', 'Something went wrong while updating reports.');
         }
