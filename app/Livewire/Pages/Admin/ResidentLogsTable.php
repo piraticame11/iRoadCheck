@@ -25,7 +25,7 @@ class ResidentLogsTable extends Component
     public string $date_range_filter = '';  // Date filter
     public int $rowsPerPage = 10;  // Rows per page
     public string $sort_by = 'log_id';  // Default sorting by primary key
-    public string $sort_direction = 'asc';  // Default sorting direction
+    public string $sort_direction = 'desc';  // Default sorting direction
 
     /**
      * Export the filtered resident logs to an Excel file.

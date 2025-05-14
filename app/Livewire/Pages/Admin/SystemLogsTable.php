@@ -29,7 +29,7 @@ class SystemLogsTable extends Component
 
     // Sorting
     public string $sort_by = 'id'; // Default sorting by primary key
-    public string $sort_direction = 'asc'; // Default sorting direction
+    public string $sort_direction = 'desc'; // Default sorting direction
 
     /**
      * Export the filtered system logs to an Excel file.
