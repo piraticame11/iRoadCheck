@@ -73,7 +73,7 @@
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Time Reported</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 100px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Road Status</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 100px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Report Count</th>
-        <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 80px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Severity</th>
+        <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 80px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Level</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 160px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Updated Report By</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Date Updated</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Time Updated</th>
