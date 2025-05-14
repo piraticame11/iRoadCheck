@@ -50,8 +50,13 @@
                              alt="Report Image"
                              class="w-full max-h-64 h-auto object-contain rounded-md mb-1">
 
-                        <p class="text-black text-center text-xs"><strong>ID:</strong> {{ $report->id }}</p>
-                        <p class="text-black text-center text-xs"><strong>Date:</strong> {{ \Carbon\Carbon::parse($report->date)->format('F d, Y') }}</p>
+                        <p class="text-black text-center text-xs"><strong>Defect:</strong> {{ $report->defect }}</p>
+                        <p class="text-black text-center text-xs">
+                            <strong>Date:</strong>
+                            {{ \Carbon\Carbon::parse($report->date)->format('F d, Y') }}
+                            {{ \Carbon\Carbon::parse($report->time)->format('h:i A') }}
+                        </p>
+
                         <p class="text-xs text-center text-black">
                             <strong>Status:</strong>
                             <span class="
