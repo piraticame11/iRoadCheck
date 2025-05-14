@@ -345,7 +345,7 @@ class ReportController extends Controller
                 if ($uniqueNames->isNotEmpty()) {
                     $mainDefect = ucfirst($uniqueNames->first());
                     $issue_name = $uniqueNames->count() > 1
-                        ? "$mainDefect & more…"
+                        ? "$mainDefect"
                         : $mainDefect;
                 } else {
                     $issue_name = 'Unknown';
@@ -353,6 +353,8 @@ class ReportController extends Controller
             } else {
                 return redirect()->back()->with('no_defect_modal_open', true);
             }
+        }else{
+            return redirect()->back()->with('no_defect_modal_open', true);
         }
 
 
