@@ -28,26 +28,29 @@ class MapViewRoadDefectReports extends Component
      */
     public function mount(): void
     {
-        $this->reports = Report::with('severity')
-            ->select('*')
+        $this->reports = Report::with(['severity', 'reporter:id,first_name,last_name']) // Make sure this relation exists
+        ->select('*')
             ->get()
             ->map(function ($report) {
-                // Format readable date
                 $report->formatted_date = $report->date
                     ? Carbon::parse($report->date)->format('F j, Y')
                     : null;
 
-                // Days ago
                 $report->days_ago = $report->date
                     ? (int) Carbon::parse($report->date)->diffInDays(now()) . ' days ago'
                     : null;
 
-                // Severity label
                 $report->severity_label = $report->severity ?? 'Unknown';
+
+                // Optional: Format full name for easier frontend use
+                $report->reporter_full_name = $report->reporter
+                    ? $report->reporter->first_name . ' ' . $report->reporter->last_name
+                    : 'Unknown';
 
                 return $report;
             })
             ->toArray();
+
 
 
 
