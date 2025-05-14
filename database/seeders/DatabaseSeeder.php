@@ -73,19 +73,19 @@ class DatabaseSeeder extends Seeder
 
         DB::table('severities')->insert([
             [
-                'label' => 'Shallow',
+                'label' => 'Level 1',
             ],
             [
-                'label' => 'Tolerable',
+                'label' => 'Level 2',
             ],
             [
-                'label' => 'Serious',
+                'label' => 'Level 3',
             ],
             [
-                'label' => 'Dangerous',
+                'label' => 'Level 4',
             ],
             [
-                'label' => 'None',
+                'label' => 'Level 0',
             ],
         ]);
 
