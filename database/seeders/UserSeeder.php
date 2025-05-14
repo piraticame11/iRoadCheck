@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Generate random users dynamically
+        //TODO e limit ang admins
         User::factory()->count(25)->create();
     }
 }
