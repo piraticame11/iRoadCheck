@@ -180,7 +180,16 @@ use Livewire\Component;
         }
     }
 
-
+    private function notifyUsers($users, $notificationData, $notifiableType)
+    {
+        foreach ($users as $user) {
+            Notification::create(array_merge($notificationData, [
+                'notifiable_id' => $user->id ?? $user->user_id,
+                'notifiable_type' => $notifiableType,
+            ]));
+//            Log::info("Notification sent to {$notifiableType} ID: {$user->id ?? $user->user_id}");
+        }
+    }
 
     public function render()
     {
