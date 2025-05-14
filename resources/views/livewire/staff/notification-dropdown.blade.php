@@ -16,7 +16,7 @@
         <svg
             x-ref="content"
             :class="'cursor-pointer rounded-[4px] text-[#6AA76F]'"
-            class="lazyload cursor-pointer w-6 h-6 hover:text-[#4AA76F] lg:mt-[4px] {{ request()->routeIs('staff.notifications') ? 'text-[#4AA76F]' : 'text-gray-400' }}"
+            class="lazyload cursor-pointer w-6 h-6 hover:text-[#4AA76F] lg:mt-[5px] {{ request()->routeIs('staff.notifications') ? 'text-[#4AA76F]' : 'text-gray-400' }}"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
             fill="{{ request()->routeIs('staff.notifications') ? '#4AA76F' : 'currentColor' }}"

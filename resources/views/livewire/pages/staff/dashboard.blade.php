@@ -83,7 +83,7 @@
 
 
                 <div class=" flex items-center justify-start lg:justify-end md:justify-end">
-                    <div class="font-semibold text-[#FFAD00] pl-2 pr-3 text-lg opacity-90 transform group-hover:scale-110 group-hover:translate-y-1 group-hover:translate-x-4 transition-all duration-500 ease-in-out">
+                    <div class="font-semibold text-[#7E91FF] pl-2 pr-3 text-lg opacity-90 transform group-hover:scale-110 group-hover:translate-y-1 group-hover:translate-x-4 transition-all duration-500 ease-in-out">
                         Total Reports : {{ $totalReport }}
                     </div>
                 </div>
@@ -105,39 +105,58 @@
                     <!-- Stats Cards -->
                     <div class="flex flex-col gap-3 mb-5">
 
-                        <!-- Today's Reports Card -->
-
-                        <a href="{{ route('staff.road-defect-reports') }}"
-                            class="relative bg-white rounded-lg shadow-md py-0 px-2 overflow-hidden min-w-auto w-[300px] max-w-[340px] h-[115px]
-                            
-                            hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow
-                            transform-gpu group">
+                        <!-- Unfixed Reports Card -->
+                        <a href="{{ route('staff.road-defect-reports', ['status' => 'Unfixed']) }}"
+                           class="relative bg-white rounded-lg shadow-md py-0 px-2 overflow-hidden min-w-auto w-[300px] max-w-[340px] h-[115px] hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow transform-gpu group">
 
                             <!-- Background graphic -->
                             <div class="absolute inset-x-0 bottom-0 opacity-90 transform group-hover:scale-125 transition-transform group-hover:translate-x-1 duration-700 ease-in-out">
-                                <img src="{{ asset('storage/images/bg-cardGraphics-blue.png') }}"
+                                <img src="{{ asset('storage/images/bg-cardGraphics-red.png') }}"
                                      class="w-full h-auto rounded-b-lg object-cover"
                                      alt="Card background graphic">
                             </div>
 
-                            <div class="flex flex-col text-[#7E91FF] mt-6 pl-2 pr-3 pt-4 relative z-10">
+                            <div class="flex flex-col text-[#E26161] mt-6 pl-2 pr-3 pt-4 relative z-10">
                                 <!-- Card Title -->
                                 <div class="font-semibold text-md opacity-90 transform group-hover:scale-110 group-hover:translate-y-1 group-hover:translate-x-3 transition-all duration-500 ease-in-out">
                                     Unfixed Reports
                                 </div>
                                 <!-- Card Counts with gentle scale on hover -->
-                                <div class="px-5 py-1 mb-3 ml-auto text-lg text-[#7E91FF] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
+                                <div class="px-5 py-1 mb-3 ml-auto text-lg text-[#E26161] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
                                     {{ $unfixedReportCount }}
                                 </div>
                             </div>
                         </a>
 
-                        <!-- Active Accounts Card -->
-                        <a href="{{ route('staff.road-defect-reports') }}"
-                            class="relative bg-white rounded-lg shadow-md p-0 overflow-hidden w-auto h-[115px]
+                        <!-- Ongoing Reports Card -->
+                        <a href="{{ route('staff.road-defect-reports', ['status' => 'Ongoing']) }}"
 
-                        hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow
-                        transform-gpu group ">
+                           class="relative bg-white rounded-lg shadow-md p-0 overflow-hidden w-auto h-[115px] hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow transform-gpu group ">
+
+                            <!-- Background graphic -->
+                            <div class="absolute inset-x-0 bottom-0 opacity-90 transform group-hover:scale-125 transition-transform group-hover:translate-x-1 duration-700 ease-in-out">
+                                <img src="{{ asset('storage/images/bg-cardGraphics-orange.png') }}"
+                                     class="w-full h-auto rounded-b-lg object-cover"
+                                     alt="Card background graphic">
+                            </div>
+
+                            <div class="flex flex-col text-[#FFAD00] mt-6 px-5 pt-4 relative z-10">
+                                <!-- Card Title -->
+                                <div class="font-semibold text-md opacity-90 transform group-hover:scale-105 group-hover:translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-in-out">
+                                    Ongoing Reports
+                                </div>
+
+                                <!-- Card Counts -->
+                                <div class="px-5 py-1 mb-3 ml-auto text-lg text-[#FFAD00] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
+                                    {{ $ongoingReportCount }}
+                                </div>
+                            </div>
+
+                        </a>
+
+                        <!-- Repaired Reports Card -->
+                        <a href="{{ route('staff.road-defect-reports', ['status' => 'Repaired']) }}"
+                           class="relative bg-white rounded-lg shadow-md p-0 overflow-hidden w-auto h-[115px] hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow transform-gpu group ">
 
                             <!-- Background graphic -->
                             <div class="absolute inset-x-0 bottom-0 opacity-90 transform group-hover:scale-125 transition-transform group-hover:translate-x-1 duration-700 ease-in-out">
@@ -149,40 +168,11 @@
                             <div class="flex flex-col text-[#4AA76F] mt-6 px-5 pt-4 relative z-10">
                                 <!-- Card Title -->
                                 <div class="font-semibold text-md opacity-90 transform group-hover:scale-105 group-hover:translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-in-out">
-                                    Ongoing Reports
+                                    Repaired Reports
                                 </div>
 
                                 <!-- Card Counts -->
-                                <div class="px-5 py-1 mb-3 ml-auto text-lg text-[#4AA76F] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
-                                    {{ $ongoingReportCount }}
-                                </div>
-                            </div>
-
-                        </a>
-
-                        <!-- Inactive Accounts Card -->
-                        
-                        <a href="{{ route('staff.road-defect-reports') }}"
-                            class="relative bg-white rounded-lg shadow-md p-0 overflow-hidden w-auto h-[115px]
-
-                        hover:drop-shadow-lg transition-all duration-500 ease-out drop-shadow
-                        transform-gpu group ">
-
-                            <!-- Background graphic -->
-                            <div class="absolute inset-x-0 bottom-0 opacity-90 transform group-hover:scale-125 transition-transform group-hover:translate-x-1 duration-700 ease-in-out">
-                                <img src="{{ asset('storage/images/bg-cardGraphics-red.png') }}"
-                                     class="w-full h-auto rounded-b-lg object-cover"
-                                     alt="Card background graphic">
-                            </div>
-
-                            <div class="flex flex-col text-[#E26161] mt-6 px-5 pt-4 relative z-10">
-                                <!-- Card Title -->
-                                <div class="font-semibold text-md opacity-90 transform group-hover:scale-105 group-hover:translate-y-1 group-hover:translate-x-1 transition-all duration-500 ease-in-out">
-                                    Fixed Reports
-                                </div>
-
-                                <!-- Card Counts -->
-                                <div class="px-5 py-1  mb-3 ml-auto text-lg text-[#E26161] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
+                                <div class="px-5 py-1  mb-3 ml-auto text-lg text-[#4AA76F] rounded-full bg-[#FBFBFB] font-bold transform group-hover:scale-105 group-hover:translate-x-1 duration-500 ease-in-out">
                                     {{ $fixedReportCount }}
                                 </div>
                             </div>

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -47,12 +48,16 @@ class  RoadDefectReports extends Component
     public array $barangays = [];
     public array $severities = [];
     public array $locations = [];
+    public $status;
+
 
     /**
      * Initialize data for filters and dropdown options
      */
-    public function mount(): void
+    public function mount(Request $request): void
     {
+        $this->status = $request->query('status'); // 'Unfixed' if coming from the card
+
         $this->defectTypes = Report::distinct()->pluck('defect')->toArray();
         $this->statuses = Report::distinct()->pluck('status')->toArray();
         $this->barangays = Report::distinct()->pluck('barangay')->toArray();
@@ -144,6 +149,10 @@ class  RoadDefectReports extends Component
                     )
                     ->orWhere('status', 'like', "%{$this->table_search}%");
             });
+        }
+
+        if ($this->status) {
+            $reportQuery->where('status', $this->status);
         }
 
         // Filter conditions
