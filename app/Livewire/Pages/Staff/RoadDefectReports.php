@@ -8,6 +8,7 @@ use App\Models\Severity;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
@@ -38,9 +39,13 @@ class RoadDefectReports extends Component
     public array $barangays = [];
     public array $severities = [];
     public array $locations = [];
+    public $status;
 
-    public function mount(): void
+
+    public function mount(Request $request): void
     {
+        $this->status = $request->query('status'); // 'Unfixed' if coming from the card
+
         $reportData = Cache::remember('report_dropdown_data', 3600, function () {
             return Report::select('defect', 'status', 'barangay', 'street', 'purok')->get();
         });
@@ -122,6 +127,10 @@ class RoadDefectReports extends Component
                     )
                     ->orWhere('status', 'like', "%{$this->table_search}%");
             });
+        }
+
+        if ($this->status) {
+            $query->where('status', $this->status);
         }
 
         if ($this->statusFilter) {
