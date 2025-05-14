@@ -178,11 +178,12 @@ class ReviewReport extends Component
                     }
 
                     try {
-                        $existingReport->report_count++;
+                        $reportCount = $existingReport->report_count + 1;
+                        $updateData = ['report_count' => $reportCount];
 
-                        if ($existingReport->report_count >= 20) {
-                            $existingReport->label = 4;
-                            $existingReport->severity = 4;
+                        if ($reportCount >= 20) {
+                            $updateData['label'] = 4;
+                            $updateData['severity'] = 4;
 
                             SystemLog::create([
                                 'transaction_id' => $existingReport->id,
@@ -190,10 +191,9 @@ class ReviewReport extends Component
                                 'action' => 'Report ID ' . $existingReport->id . ' reached 10+ reports. Label and severity set to 4.',
                                 'type' => 'report_update',
                             ]);
-
-                        } elseif ($existingReport->report_count >= 15) {
-                            $existingReport->label = 3;
-                            $existingReport->severity = 3;
+                        } elseif ($reportCount >= 15) {
+                            $updateData['label'] = 3;
+                            $updateData['severity'] = 3;
 
                             SystemLog::create([
                                 'transaction_id' => $existingReport->id,
@@ -201,10 +201,9 @@ class ReviewReport extends Component
                                 'action' => 'Report ID ' . $existingReport->id . ' reached 5+ reports. Label and severity set to 3.',
                                 'type' => 'report_update',
                             ]);
-
-                        } elseif ($existingReport->report_count >= 10) {
-                            $existingReport->label = 2;
-                            $existingReport->severity = 2;
+                        } elseif ($reportCount >= 10) {
+                            $updateData['label'] = 2;
+                            $updateData['severity'] = 2;
 
                             SystemLog::create([
                                 'transaction_id' => $existingReport->id,
@@ -212,10 +211,9 @@ class ReviewReport extends Component
                                 'action' => 'Report ID ' . $existingReport->id . ' reached 3+ reports. Label and severity set to 2.',
                                 'type' => 'report_update',
                             ]);
-
-                        } elseif ($existingReport->report_count >= 5) {
-                            $existingReport->label = 1;
-                            $existingReport->severity = 1;
+                        } elseif ($reportCount >= 5) {
+                            $updateData['label'] = 1;
+                            $updateData['severity'] = 1;
 
                             SystemLog::create([
                                 'transaction_id' => $existingReport->id,
@@ -224,11 +222,16 @@ class ReviewReport extends Component
                                 'type' => 'report_update',
                             ]);
                         }
-                        $existingReport->save();
+
+                        // Perform update
+                        DB::table('reports')
+                            ->where('id', $existingReport->id)
+                            ->update($updateData);
 
                     } catch (\Exception $e) {
                         throw new \Exception('Error updating report count: ' . $e->getMessage());
                     }
+
 
 
                     try {
