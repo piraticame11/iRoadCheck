@@ -10,7 +10,7 @@
             <path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1l124 124 17 17L478.1 512l-17-17-124-124z" />
         </svg>
         <input
-            class="ml-2 border border-gray-300 focus:outline-none focus:ring-[0.5px] focus:ring-[#4AA76F] focus:border-[#4AA76F] shadow-[0px_1px_5px_rgba(0,0,0,0.2)] focus:bg-white bg-white rounded-[4px] block w-full py-1 pl-8 text-gray-900 placeholder:text-gray-400 text-xs"
+            class="ml-2 border border-gray-300 focus:outline-none focus:ring-[0.5px] focus:ring-[#4AA76F] focus:border-[#4AA76F] shadow-[0px_1px_5px_rgba(0,0,0,0.2)] focus:bg-white bg-white rounded-[4px] block w-full py-3 lg:py-1 pl-8 text-gray-900 placeholder:text-gray-400 text-sm md:text-xs lg:text-xs"
             x-on:input="
                 filterMarkers($event.target.value);
                 showFilters = $event.target.value.trim() !== '';
@@ -371,7 +371,7 @@
 <script>
     var geoJsonData = @json($geoJsonData);
 
-    function mapComponent() {
+    window.mapComponent = function() {
         return {
             reports: @json($reports),
             severityMap: {
