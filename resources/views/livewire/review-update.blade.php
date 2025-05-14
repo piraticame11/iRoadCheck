@@ -37,7 +37,7 @@
             <h1 class="text-lg font-bold text-center text-black sticky top-[-20px] shadow-md bg-white p-4 z-10">
                 Nearby Reports Found!
             </h1>
-            <div class="grid grid-cols-2 justify-center gap-4">
+            <div class="grid grid-cols-2 justify-center">
                 @foreach ($nearbyReports as $report)
                     <div
                         class="border rounded-md  p-2 flex flex-col items-center cursor-pointer transition-transform transform hover:scale-100 w-40 h-65"
