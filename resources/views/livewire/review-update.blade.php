@@ -52,12 +52,16 @@
 
                         <p class="text-black text-center text-xs"><strong>ID:</strong> {{ $report->id }}</p>
                         <p class="text-black text-center text-xs"><strong>Date:</strong> {{ \Carbon\Carbon::parse($report->date)->format('F d, Y') }}</p>
-                        <p class="text-center text-xs font-semibold
-    @if ($report->status === 'Ongoing') text-yellow-500
-    @elseif ($report->status === 'Unfixed') text-red-500
-    @else text-black
-    @endif">
-                            <strong>Status:</strong> {{ $report->status }}
+                        <p class="text-xs text-center text-black">
+                            <strong>Status:</strong>
+                            <span class="
+        @if ($report->status === 'Ongoing') text-yellow-500
+        @elseif ($report->status === 'Unfixed') text-red-500
+        @else text-black
+        @endif
+    ">
+        {{ $report->status }}
+    </span>
                         </p>
 
                         <p class="text-xs text-gray-500 text-center">Click to select</p>
