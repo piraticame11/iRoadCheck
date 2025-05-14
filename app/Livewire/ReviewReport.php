@@ -87,7 +87,7 @@ class ReviewReport extends Component
                 ->first();
 
 
-            if ($existingReport->count() == 0) {
+            if (!$existingReport) {
 
                 // Create a new record in the reports table
                 $report = Report::create([
