@@ -73,7 +73,6 @@ class ReviewReport extends Component
             // Check if report already exists
             $existingReport = DB::table('reports')
                 ->where('reporter_id', '!=', $userId)
-                ->where('location', $temporaryReport->location)
                 ->where('defect', $temporaryReport->defect)
                 ->where('status', 'Unfixed')
                 ->whereRaw(
