@@ -328,8 +328,8 @@
                                 </x-slot:image>
                             </x-admin.admin-view-road-defect-report-image-modal>
                             <div class="mb-2 text-xs lg:text-sm flex w-full">
-                                <div class="w-2/4 text-gray-600">Updated By Staff: (Role)</div>
-                                <div class="w-2/4" x-text="selectedReport.updater_id"></div>
+                                <div class="w-2/4 text-gray-600">Updated By: </div>
+                                <div class="w-2/4" x-text="selectedReport.updater_full_name"></div>
                             </div>
                             <div class="text-xs lg:text-sm flex w-full">
                                 <div class="w-2/4 text-gray-600">Date Reported:</div>

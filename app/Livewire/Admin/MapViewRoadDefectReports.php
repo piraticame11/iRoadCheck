@@ -29,8 +29,12 @@ class MapViewRoadDefectReports extends Component
     public function mount(): void
     {
 
-        $this->reports = Report::with(['severity', 'reporter:id,first_name,last_name']) // Load minimal fields
-        ->select('*')
+        $this->reports = Report::with([
+            'severity',
+            'reporter:id,first_name,last_name', // Only needed columns
+            'updater:id,first_name,last_name'
+        ])
+            ->select('*')
             ->get()
             ->map(function ($report) {
                 $report->formatted_date = $report->date
@@ -38,18 +42,27 @@ class MapViewRoadDefectReports extends Component
                     : null;
 
                 $report->days_ago = $report->date
-                    ? (int) Carbon::parse($report->date)->diffInDays(now()) . ' days ago'
+                    ? Carbon::parse($report->date)->diffInDays(now()) . ' days ago'
                     : null;
 
                 $report->severity_label = $report->severity ?? 'Unknown';
 
-                // Safely decrypt reporter name
+                // Decrypt reporter full name
                 try {
                     $report->reporter_full_name = $report->reporter
                         ? Crypt::decryptString($report->reporter->first_name) . ' ' . Crypt::decryptString($report->reporter->last_name)
                         : 'Unknown';
                 } catch (\Exception $e) {
                     $report->reporter_full_name = 'Decryption Error';
+                }
+
+                // Decrypt updater full name
+                try {
+                    $report->updater_full_name = $report->updater
+                        ? Crypt::decryptString($report->updater->first_name) . ' ' . Crypt::decryptString($report->updater->last_name)
+                        : 'Unknown';
+                } catch (\Exception $e) {
+                    $report->updater_full_name = 'Decryption Error';
                 }
 
                 return $report;
