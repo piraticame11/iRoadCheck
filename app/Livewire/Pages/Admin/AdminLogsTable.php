@@ -32,7 +32,7 @@ class AdminLogsTable extends Component
 
     // Sorting
     public string $sort_by = 'log_id'; // Default sorting by primary key
-    public string $sort_direction = 'asc'; // Default sorting direction
+    public string $sort_direction = 'desc'; // Default sorting direction
 
     /**
      * Export the filtered admin logs to an Excel file.

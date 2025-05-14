@@ -1,4 +1,4 @@
-<div x-data="mapComponent()" class="-mt-5 lg:-mt-8 bg-none overflow-y-auto h-full py-2 -ml-2">
+<div x-data="mapComponent()" class="bg-none overflow-y-auto h-full py-1 mt-2 -ml-2">
 
     <!--Page description-->
     <div class="hidden lg:block mb-2 text-xs text-[#656565] pl-3 py-3">
@@ -6,7 +6,7 @@
     </div>
 
     <!-- Map Reports Information -->
-    <div class="min-h-[35vh] max-h-[75vh] -mt-3 lg:mt-0 z-0 m-0 border border-t-gray-300 lg:min-h-[35vh] lg:max-h-[78vh] inset-0">
+    <div class="min-h-[35vh] max-h-[75vh] mt-2 lg:mt-0 z-0 m-0 border border-t-gray-300 lg:min-h-[35vh] lg:max-h-[78vh] inset-0">
         <div class="w-full inline-block align-middle p-0 z-0">
             <div class="flex" x-data="{ expanded: false }">
                 <button @click="expanded = !expanded"
@@ -81,14 +81,14 @@
     </div>
 
     <!-- Draggable Bottom Panel -->
-    <div class="block lg:hidden flex justify-center w-full ">
+    <div class="block lg:hidden flex justify-center w-full">
         <div
             x-data="draggablePanel()"
             x-bind:style="'height: ' + panelHeight"
             @touchstart.passive="startDrag($event)"
             @touchmove.passive="onDrag($event)"
             @touchend="endDrag"
-            class="fixed bottom-0 w-full bg-green-500 p-1 rounded-t-2xl shadow-lg transition-all duration-300 ease-in-out overflow-hidden flex justify-center z-[99999]"
+            class="fixed bottom-0 w-full bg-green-500 p-1 rounded-t-2xl shadow-lg transition-all duration-300 ease-in-out overflow-hidden flex justify-center z-[99999] pb-20"
         >
             <div class="w-full flex flex-col justify-center items-center bg-white rounded-t-xl pl-1 pr-3">
                 <!-- Drag Handle -->
@@ -101,7 +101,7 @@
                     <!-- Optional Search + Filters -->
                     <div x-data="{ showFilters: false }" class="flex flex-col gap-3">
                         <!-- ✅ Expand panel when clicking search -->
-                        <div class="relative flex flex-1 w-full pt-2 pb-0 -mt-1" >
+                        <div class="relative flex flex-1 w-full pt-2 py-3 pb-0 -mt-1" >
                             {{ $search_container }}
                         </div>
                         <!-- Dropdown Filters -->
@@ -135,13 +135,14 @@
                 open: false,
                 startY: 0,
                 currentY: 0,
-                panelHeight: '120px',
+                totalDrag: 0,
+                panelHeight: '180px',
                 isDragging: false,
-                minHeight: 125, // in px
-                maxHeight: window.innerHeight * 0.8, // 80%
-                fullHeight: '75vh',
+                minHeight: 180, // in px
+                maxHeight: window.innerHeight * 0.85, // 80%
+                fullHeight: '80vh',
                 isOpen: false,
-                dragThreshold: 50, // Max Y deviation allowed from the panel
+                dragThreshold: 30, // This small threshold determines snap action
 
                 expandPanel() {
                     this.isOpen = true;
@@ -156,8 +157,8 @@
                 startDrag(event) {
                     this.isDragging = true;
                     this.startY = event.touches[0].clientY;
+                    this.totalDrag = 0;
 
-                    // Attach document-level listener to detect dragging outside
                     document.addEventListener('touchmove', this.checkIfOutsidePanel, { passive: false });
                 },
 
@@ -166,6 +167,8 @@
 
                     this.currentY = event.touches[0].clientY;
                     let diff = this.startY - this.currentY;
+                    this.totalDrag += diff;
+
                     let newHeight = parseInt(this.panelHeight) + diff;
 
                     if (newHeight < this.minHeight) newHeight = this.minHeight;
@@ -179,23 +182,31 @@
                     this.isDragging = false;
                     document.removeEventListener('touchmove', this.checkIfOutsidePanel);
 
-                    const currentHeight = parseInt(this.panelHeight);
-
-                    if (currentHeight > this.maxHeight * 0.8) {
+                    if (this.totalDrag < -this.dragThreshold) {
+                        // Dragged down — close it
+                        this.panelHeight = `${this.minHeight}px`;
+                        this.open = false;
+                    } else if (this.totalDrag > this.dragThreshold) {
+                        // Dragged up — open it
                         this.panelHeight = `${this.maxHeight}px`;
                         this.open = true;
                     } else {
-                        this.panelHeight = `${this.minHeight}px`;
-                        this.open = false;
+                        // Snap to nearest
+                        const currentHeight = parseInt(this.panelHeight);
+                        if (currentHeight > (this.minHeight + this.maxHeight) / 2) {
+                            this.panelHeight = `${this.maxHeight}px`;
+                            this.open = true;
+                        } else {
+                            this.panelHeight = `${this.minHeight}px`;
+                            this.open = false;
+                        }
                     }
                 },
 
                 checkIfOutsidePanel(event) {
                     const touchY = event.touches[0].clientY;
                     const panelTop = window.innerHeight - parseInt(this.panelHeight);
-
-                    if (touchY < panelTop - this.dragThreshold || touchY > window.innerHeight + this.dragThreshold) {
-                        // If user drags way outside, cancel the drag
+                    if (touchY < panelTop - 100 || touchY > window.innerHeight + 100) {
                         this.isDragging = false;
                         document.removeEventListener('touchmove', this.checkIfOutsidePanel);
                     }

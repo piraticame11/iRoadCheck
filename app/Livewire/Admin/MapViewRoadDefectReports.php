@@ -7,6 +7,7 @@ use App\Models\Severity;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
@@ -20,20 +21,25 @@ class MapViewRoadDefectReports extends Component
     public array $statuses = [];
     public array $defectTypes = [];
     public array $severities = [];
+    public $status;
 
     protected $listeners = ['update-map-data' => 'updateMapData'];
 
     /**
      * Mount the component and load initial data.
      */
-    public function mount(): void
+    public function mount(Request $request): void
     {
+        $this->status = $request->query('status');
 
         $this->reports = Report::with([
             'severity',
             'reporter:id,first_name,last_name', // Only needed columns
             'updater:id,first_name,last_name'
         ])
+            ->when($this->status, function ($query) {
+                $query->where('status', $this->status);
+            })
             ->select('*')
             ->get()
             ->map(function ($report) {
