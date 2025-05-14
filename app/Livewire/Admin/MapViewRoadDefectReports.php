@@ -29,10 +29,6 @@ class MapViewRoadDefectReports extends Component
     public function mount(): void
     {
         $this->reports = Report::with('severity')
-            ->where('label', '!=', 5)
-            ->whereHas('severity', function ($query) {
-                $query->where('label', '!=', 5);
-            })
             ->select('*')
             ->get()
             ->map(function ($report) {
@@ -52,6 +48,7 @@ class MapViewRoadDefectReports extends Component
                 return $report;
             })
             ->toArray();
+
 
 
         // ✅ Load unique filtering options
