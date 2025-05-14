@@ -205,7 +205,7 @@ class ProfileEdit extends Component
                 'regex:/[A-Z]/',  // At least one uppercase letter
                 'regex:/[a-z]/',  // At least one lowercase letter
                 'regex:/[0-9]/',  // At least one digit
-                'regex:/[@$!%*?&]/' // At least one special character
+                'regex:/[!@#$%^&*()_\-+=\{\}\[\]|\\:;\"\'<>,.?\/~`]/'// At least one special character
             ];
             $rules['password_confirmation'] = 'required|same:password';
         }
