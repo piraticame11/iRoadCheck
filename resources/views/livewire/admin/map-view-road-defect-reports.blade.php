@@ -256,7 +256,7 @@
                                 </x-slot:image>
                             </x-admin.admin-view-road-defect-report-image-modal>
                             <div class="mb-2 text-xs lg:text-sm flex w-full">
-                                <div class="w-2/4 text-gray-600">First Reporter Full Name: {{$reports}}</div>
+                                <div class="w-2/4 text-gray-600">First Reporter Full Name: </div>
                                 <div class="w-2/4" x-text="selectedReport.id"></div>
 
                             </div>
