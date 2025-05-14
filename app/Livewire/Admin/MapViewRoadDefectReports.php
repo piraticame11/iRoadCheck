@@ -7,11 +7,11 @@ use App\Models\Severity;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Carbon\Carbon;
 use Illuminate\Support\HtmlString;
-
 class MapViewRoadDefectReports extends Component
 {
     public array $reports = [];
@@ -28,7 +28,8 @@ class MapViewRoadDefectReports extends Component
      */
     public function mount(): void
     {
-        $this->reports = Report::with(['severity', 'reporter:id,first_name,last_name']) // Make sure this relation exists
+
+        $this->reports = Report::with(['severity', 'reporter:id,first_name,last_name']) // Load minimal fields
         ->select('*')
             ->get()
             ->map(function ($report) {
@@ -42,14 +43,19 @@ class MapViewRoadDefectReports extends Component
 
                 $report->severity_label = $report->severity ?? 'Unknown';
 
-                // Optional: Format full name for easier frontend use
-                $report->reporter_full_name = $report->reporter
-                    ? $report->reporter->first_name . ' ' . $report->reporter->last_name
-                    : 'Unknown';
+                // Safely decrypt reporter name
+                try {
+                    $report->reporter_full_name = $report->reporter
+                        ? Crypt::decryptString($report->reporter->first_name) . ' ' . Crypt::decryptString($report->reporter->last_name)
+                        : 'Unknown';
+                } catch (\Exception $e) {
+                    $report->reporter_full_name = 'Decryption Error';
+                }
 
                 return $report;
             })
             ->toArray();
+
 
 
 
