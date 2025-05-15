@@ -30,9 +30,10 @@
     <!-- Notifications Count (Red Dot) -->
     <span x-cloak
           x-show="showRedDot()"
+          x-text="notificationCount"
           class="lazyload absolute scale-90 -top-0.5 -right-0.5 grid min-h-[24px] min-w-[24px] max-h-[34px] max-w-[34px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full border-1 border-[#202020] bg-red-600 py-0.5 px-0.5 text-xs text-white pointer-events-none">
-        {{ $notifications_count }}
-    </span>
+        </span>
+
 </div>
 
 {{--    <!-- Dropdown Notifications -->--}}
