@@ -44,7 +44,7 @@ class RoadDefectReports extends Component
 
     public function mount(Request $request): void
     {
-        $this->status = $request->query('status'); // 'Unfixed' if coming from the card
+//        $this->status = $request->query('status'); // 'Unfixed' if coming from the card
 
         $reportData = Cache::remember('report_dropdown_data', 3600, function () {
             return Report::select('defect', 'status', 'barangay', 'street', 'purok')->get();
@@ -129,9 +129,9 @@ class RoadDefectReports extends Component
             });
         }
 
-        if ($this->status) {
-            $query->where('status', $this->status);
-        }
+//        if ($this->status) {
+//            $query->where('status', $this->status);
+//        }
 
         if ($this->statusFilter) {
             $query->where('status', $this->statusFilter);
