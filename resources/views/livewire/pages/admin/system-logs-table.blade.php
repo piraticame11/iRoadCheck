@@ -114,7 +114,7 @@
                         <tbody class="divide-y divide-gray-300 bg-white relative">
                         @forelse ($systemLogs as $systemLog)
                             <tr class="{{ $loop->iteration % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} hover:bg-gray-100">
-                                <td class="px-4 py-3 text-xs">{{ $systemLog->firstItem() + $loop->index }}</td>
+                                <td class="px-4 py-3 text-xs">{{ $systemLog->id }}</td>
                                 <td class="px-4 py-3 text-xs">{{ $systemLog->transaction_id }}</td>
                                 <td class="px-4 py-3 text-xs">{{ $systemLog->action }}</td>
                                 <td class="px-4 py-3 text-xs">

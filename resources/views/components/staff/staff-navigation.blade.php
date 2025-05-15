@@ -126,7 +126,7 @@
         </x-Staff.staff-web-sidebar>
 
         <!-- Mobile screens Sidebar -->
-        <x-staff.staff-mobile-sidebar/>
+        <x-Staff.staff-mobile-sidebar/>
 
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col">

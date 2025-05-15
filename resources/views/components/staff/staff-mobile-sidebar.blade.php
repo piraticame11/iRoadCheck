@@ -3,7 +3,7 @@
     @php
         use App\Models\Staff;use App\Models\StaffRolesPermissions;$user = \Auth::user();
         $staff = Staff::where('user_id', $user->id)->first();
-        $roleId = $staff?->staffRole?->id ?? null;
+        $roleId = $staff?->staffRolesPermissions?->staffRole?->id ?? null;
         $hasPermission = false;
 
         if ($roleId) {
@@ -21,6 +21,10 @@
                 ->exists();
         }
     @endphp
+
+    @if ($hasPermission)
+        {{-- show dashboard content --}}
+    @endif
     <!-- Dashboard -->
     @if ($hasPermissionDashboard)
         <a href="{{ route('staff.dashboard') }}" wire:navigate

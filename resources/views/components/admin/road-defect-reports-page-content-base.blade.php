@@ -1,7 +1,7 @@
 <!-- Main Content -->
 <div class="-mt-5 bg-none overflow-y-auto h-auto py-2">
 
-    <div class="text-[#202020] bg-[#FBFBFB] mt-1 pt-0 rounded-lg drop-shadow"
+    <div class="text-[#202020] bg-[#FBFBFB] mt-1 pt-0 pb-2 rounded-lg drop-shadow"
          x-data="{
             tileCount: 4,
             view: localStorage.getItem('mapReportView') || 'grid',
