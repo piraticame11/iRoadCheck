@@ -1034,7 +1034,8 @@
                                 </div>
                                 <div class="px-3 py-2">
                                     <div>Type of Road Defect: ${report.defect}</div>
-                                    <div>Date Reported: ${report.date}</div>
+<div>Report count: ${report.report_count}</div>
+                                        <div>Date Reported: ${report.date}</div>
                                     <div class="font-semibold">Location: ${report.location}</div>
                                 </div>
                             </div>

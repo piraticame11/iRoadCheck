@@ -177,10 +177,9 @@ class RoadDefectReports extends Component
 
     public function exportRoadDefectReports(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
-        return Excel::download(
-            new RoadDefectReportsExport($this->getFilteredQuery()),
-            'road_defect_reports.xlsx'
-        );
+        $filteredRoadDefectReports = $this->getFilteredQuery()->get();
+
+        return Excel::download(new RoadDefectReportsExport($filteredRoadDefectReports), 'road_defect_reports.xlsx');
     }
 
     public function render(): Factory|View|Application|\Illuminate\View\View

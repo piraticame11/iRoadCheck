@@ -116,7 +116,7 @@
                         @change="activeFilter = 'severityFilter'"
                         class="text-[12px] block appearance-none w-full bg-transparent border-none focus:ring-0 px-3 py-1 pr-8 rounded shadow-none focus:outline-none focus:scale-105"
                     >
-                        <option value="" class="text-gray-400 text-[12px]">Severity</option>
+                        <option value="" class="text-gray-400 text-[12px]">Level</option>
                         @foreach($severities as $label)
                             <option value="{{ $label }}">{{ $label }}</option>
                         @endforeach
@@ -257,7 +257,7 @@
                         </th>
                         <th scope="col" class="sticky top-0 z-10 bg-white py-3 px-4 text-xs font-semibold text-[#757575]">
                             <button class="flex items-end" wire:click="toggleSorting('severity.label')">
-                                Severity
+                                Level
                                 <div x-cloak x-show="$wire.sort_by === 'severity.label'">
                                     <x-arrow-up x-cloak x-show="$wire.sort_direction === 'asc'" />
                                     <x-arrow-down x-cloak x-show="$wire.sort_direction === 'desc'" />
@@ -298,25 +298,8 @@
                             <td class="px-4 py-3 text-xs">{{ $report->date ? \Carbon\Carbon::parse($report->date)->format('F j, Y') : 'N/A' }}</td>
                             <td class="px-4 py-3 text-xs font-semibold" style="color: {{ $color }};">{{ $report->status }}</td>
                             <td class="px-4 py-3 text-xs">{{ $report->report_count }}</td>
-                            @php
-                                $severityLabel = DB::table('severities')
-                                    ->where('id', $report->severity)
-                                    ->value('label') ?? 'N/A';
-                            @endphp
-
-                            <td class="px-4 py-3 text-xs font-medium italic">
-                                {{ $severityLabel }}
-                            </td>
-
-                            @php
-                                $updater = \App\Models\User::find($report->updater_id);
-                            @endphp
-
-                            <td class="px-4 py-3 text-xs">
-                                {{ $updater ? Crypt::decryptString($updater->first_name) . ' ' . Crypt::decryptString($updater->last_name) : 'Not yet updated' }}
-                            </td>
-
-
+                            <td class="px-4 py-3 text-xs font-medium italic">{{ $report->severity->label ?? 'N/A' }}</td>
+                            <td class="px-4 py-3 text-xs">{{ $report->updated_by }}</td>
                             <td class="px-2 py-3 text-[11px] lg:text-xs">
                                 <button class="flex items-center text-[#3251FF] hover:text-[#1d3fcc] font-medium text-xs transition active:scale-95 hover:bg-blue-100 hover:shadow py-1 px-3 rounded-md"
                                         wire:click="viewRoadDefectReports({{ $report->id }})"
