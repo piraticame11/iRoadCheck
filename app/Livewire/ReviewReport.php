@@ -143,10 +143,10 @@ class ReviewReport extends Component
                 ]);
 
                 // Optionally delete the temporary report after copying
-                $temporaryReport->delete();
-                $this->isOpen = false;
                 session()->flash('feedback', 'Report submitted successfully!');
                 session()->flash('feedback_type', 'success');
+                $temporaryReport->delete();
+                $this->isOpen = false;
             }
             //
             else{
@@ -240,7 +240,8 @@ class ReviewReport extends Component
                     } catch (\Exception $e) {
                         throw new \Exception('Error updating report count: ' . $e->getMessage());
                     }
-
+                    session()->flash('feedback', 'Report submitted successfully!');
+                    session()->flash('feedback_type', 'success');
 
 
                     try {
@@ -308,8 +309,7 @@ class ReviewReport extends Component
                     }
 
                     DB::commit();
-                    session()->flash('feedback', 'Report submitted successfully!');
-                    session()->flash('feedback_type', 'success');
+
                     return $this->redirect('/residents/report-road-issue', navigate: true);
 
                 } catch (\Exception $e) {
