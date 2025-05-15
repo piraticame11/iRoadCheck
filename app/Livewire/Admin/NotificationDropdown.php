@@ -30,7 +30,7 @@ class NotificationDropdown extends Component
     public function mount(): void
     {
         $this->fetchNotifications();
-        dd($this->notifications);
+        dd($this->notifications_count);
     }
 
     public function fetchNotifications(): void
