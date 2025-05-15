@@ -237,10 +237,10 @@
                                              'text-red-600': selectedReport.status === 'Unfixed'
                                          }" x-text="selectedReport.status"></div>
                                 </div>
-                                <div class="text-xs lg:text-sm flex justify-start items-start w-full">
-                                    <div class="w-2/4 font-medium text-gray-600">Severity:</div>
-                                    <div class="w-2/4" x-text="selectedReport.severity_label"></div>
-                                </div>
+{{--                                <div class="text-xs lg:text-sm flex justify-start items-start w-full">--}}
+{{--                                    <div class="w-2/4 font-medium text-gray-600">Severity:</div>--}}
+{{--                                    <div class="w-2/4" x-text="selectedReport.severity_label"></div>--}}
+{{--                                </div>--}}
                                 <div class="text-xs lg:text-sm flex justify-start items-start w-full">
                                     <div class="w-2/4 font-medium text-gray-600">Location:</div>
                                     <div class="w-2/4" x-text="selectedReport.location"></div>
