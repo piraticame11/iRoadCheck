@@ -1270,19 +1270,30 @@
                                 detail.className = "p-3 bg-gray-50 rounded-md border hover:bg-gray-100 cursor-pointer transition hover:scale-105";
                                 detail.dataset.reportId = report.id;
 
-                                detail.innerHTML = `
-                                    <p><span class="font-semibold">Location:</span> ${report.location ?? 'Unknown Location'}</p>
-                                    <p><span class="font-semibold">Date Reported:</span> ${report.formatted_date ?? 'Unknown Date'}</p>
-                                    <p><span class="font-semibold">Status:</span> ${report.status ?? 'Unknown Status'}</p>
-                                    <p><span class="font-semibold">Report count:</span> ${report.report_count ?? report.report_count  ?? 'No count'}</p>
-                                    @php
-                                    $days = \Carbon\Carbon::parse($report->date)->diffInDays();
-                                @endphp
-                                <p><span class="font-semibold">Days Ago:</span>
-{{ $days === 0 ? 'Today' : ($days === 1 ? '1 day ago' : $days . ' days ago') }}
-                                </p>
+                                function getDaysAgo(dateString) {
+                                    const date = new Date(dateString);
+                                    const now = new Date();
+                                    const diffTime = Math.abs(now - date);
+                                    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
+                                    return diffDays === 0
+                                        ? 'Today'
+                                        : diffDays === 1
+                                            ? '1 day ago'
+                                            : `${diffDays} days ago`;
+                                }
+
+// Then:
+                                detail.innerHTML = `
+    <p><span class="font-semibold">Location:</span> ${report.location ?? 'Unknown Location'}</p>
+    <p><span class="font-semibold">Date Reported:</span> ${report.formatted_date ?? 'Unknown Date'}</p>
+    <p><span class="font-semibold">Status:</span> ${report.status ?? 'Unknown Status'}</p>
+    <p><span class="font-semibold">Report count:</span> ${report.report_count ?? 'No count'}</p>
+    <p><span class="font-semibold">Days Ago:</span> ${getDaysAgo(report.date)}</p>
 `;
+
+
+                                `;
 
                                 detail.addEventListener("click", () => {
                                     this.viewReport(report.id);
