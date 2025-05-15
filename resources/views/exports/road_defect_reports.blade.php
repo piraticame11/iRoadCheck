@@ -92,7 +92,7 @@
                 {{ $report->date ? \Carbon\Carbon::parse($report->date)->format('F j, Y') : 'N/A' }}
             </td>
             <td style="border: 1px solid #101010; text-align: left;">
-                {{ $report->time_reported ? \Carbon\Carbon::parse($report->time)->format('h:i A') : 'N/A' }}
+                {{ $report->time ? \Carbon\Carbon::parse($report->time)->format('h:i A') : 'N/A' }}
             </td>
             <td style="border: 1px solid #101010; text-align: left;">{{ $report->status}}</td>
             <td style="border: 1px solid #101010; text-align: center;">{{ $report->report_count ?? 1 }}</td>
