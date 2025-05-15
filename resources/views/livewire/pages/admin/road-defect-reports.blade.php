@@ -105,23 +105,23 @@
                     </select>
                 </div>
 
-                <!-- Severity Filter -->
-                <div class="relative flex rounded-[4px] border hover:shadow-md custom-select"
-                     :class="{
-                         'bg-green-200 bg-opacity-20 text-green-800 border-[#4AA76F]': activeFilter === 'severityFilter',  /* Active state */
-                         'text-gray-600 border-gray-300 hover:border-[#4AA76F]': activeFilter !== 'severityFilter'  /* Default and hover state */
-                     }">
-                    <select
-                        wire:model.live="severityFilter"
-                        @change="activeFilter = 'severityFilter'"
-                        class="text-[12px] block appearance-none w-full bg-transparent border-none focus:ring-0 px-3 py-1 pr-8 rounded shadow-none focus:outline-none focus:scale-105"
-                    >
-                        <option value="" class="text-gray-400 text-[12px]">Level</option>
-                        @foreach($severities as $label)
-                            <option value="{{ $label }}">{{ $label }}</option>
-                        @endforeach
-                    </select>
-                </div>
+{{--                <!-- Severity Filter -->--}}
+{{--                <div class="relative flex rounded-[4px] border hover:shadow-md custom-select"--}}
+{{--                     :class="{--}}
+{{--                         'bg-green-200 bg-opacity-20 text-green-800 border-[#4AA76F]': activeFilter === 'severityFilter',  /* Active state */--}}
+{{--                         'text-gray-600 border-gray-300 hover:border-[#4AA76F]': activeFilter !== 'severityFilter'  /* Default and hover state */--}}
+{{--                     }">--}}
+{{--                    <select--}}
+{{--                        wire:model.live="severityFilter"--}}
+{{--                        @change="activeFilter = 'severityFilter'"--}}
+{{--                        class="text-[12px] block appearance-none w-full bg-transparent border-none focus:ring-0 px-3 py-1 pr-8 rounded shadow-none focus:outline-none focus:scale-105"--}}
+{{--                    >--}}
+{{--                        <option value="" class="text-gray-400 text-[12px]">Level</option>--}}
+{{--                        @foreach($severities as $label)--}}
+{{--                            <option value="{{ $label }}">{{ $label }}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
 
                 <!-- Date Range Filter -->
                 <div
