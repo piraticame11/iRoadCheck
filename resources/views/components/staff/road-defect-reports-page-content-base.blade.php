@@ -1,7 +1,7 @@
 <!-- Main Content -->
 <div class="-mt-5 bg-none overflow-y-auto h-auto py-2">
 
-    <div class="text-[#202020] bg-[#FBFBFB] mt-1 pt-0 rounded-lg drop-shadow"
+    <div class="text-[#202020] bg-[#FBFBFB] mt-0 pt-0 rounded-lg drop-shadow"
          x-data="{
             tileCount: 4,
             view: localStorage.getItem('mapReportView') || 'grid',
@@ -22,16 +22,34 @@
 
         <div class="pl-2">
             <!-- View Toggle Buttons -->
-            <div class="absolute mb-5 flex items-end justify-start top-3 right-7 z-10">
+            <div class="absolute mb-5 flex items-end justify-start top-2 md:top-3 right-5 md:right-7 lg:right-14 z-10">
                 <button @click="setView('grid')"
                         x-data="{
-                                tooltipVisible: false,
-                                tooltipText: 'Map View',
-                                tooltipArrow: true,
-                                tooltipPosition: 'top'
-                            }"
-                        x-on:mouseenter="tooltipVisible = true"
-                        x-on:mouseleave="tooltipVisible = false"
+                            tooltipVisible: false,
+                            tooltipText: 'Map View',
+                            tooltipArrow: true,
+                            tooltipPosition: 'top',
+                            showTooltip() {
+                                if (window.innerWidth >= 768) { // Tailwind's 'md' breakpoint
+                                    this.tooltipVisible = true;
+                                }
+                            },
+                            hideTooltip() {
+                                this.tooltipVisible = false;
+                            },
+                            hoverable: window.innerWidth >= 768,
+                            init() {
+                                // Update hoverable state on window resize
+                                window.addEventListener('resize', () => {
+                                    this.hoverable = window.innerWidth >= 768;
+                                });
+                            }
+
+                        }"
+                        {{--                        x-on:mouseenter="tooltipVisible = true"--}}
+                        {{--                        x-on:mouseleave="tooltipVisible = false"--}}
+                        @mouseenter="if (hoverable) tooltipVisible = true"
+                        @mouseleave="if (hoverable) tooltipVisible = false"
                         :class="{ 'bg-[#4AA76F] text-white': view === 'grid', 'hover:bg-[#4AA76F] hover:text-white text-[#4AA76F]': view !== 'grid' }"
                         class="px-2 py-2 mr-2 text-white rounded flex items-center relative">
                     <!-- Tooltip -->
@@ -61,10 +79,28 @@
                             tooltipVisible: false,
                             tooltipText: 'Table View',
                             tooltipArrow: true,
-                            tooltipPosition: 'top'
+                            tooltipPosition: 'top',
+                            showTooltip() {
+                                if (window.innerWidth >= 768) { // Tailwind's 'md' breakpoint
+                                    this.tooltipVisible = true;
+                                }
+                            },
+                            hideTooltip() {
+                                this.tooltipVisible = false;
+                            },
+                            hoverable: window.innerWidth >= 768,
+                            init() {
+                                // Update hoverable state on window resize
+                                window.addEventListener('resize', () => {
+                                    this.hoverable = window.innerWidth >= 768;
+                                });
+                            }
+
                         }"
-                        x-on:mouseenter="tooltipVisible = true"
-                        x-on:mouseleave="tooltipVisible = false"
+                        {{-- x-on:mouseenter="tooltipVisible = true"--}}
+                        {{-- x-on:mouseleave="tooltipVisible = false"--}}
+                        @mouseenter="if (hoverable) tooltipVisible = true"
+                        @mouseleave="if (hoverable) tooltipVisible = false"
                         :class="{ 'bg-[#4AA76F] text-white': view === 'table', 'hover:bg-[#4AA76F] hover:text-white text-[#4AA76F]': view !== 'table' }"
                         class="px-2 py-2 text-white rounded flex items-center relative">
                     <!-- Tooltip -->
@@ -99,13 +135,17 @@
         </div>
 
         <!--Table View-->
-        <div x-show="view === 'table'" class="text-[#202020] rounded-[6px] mt-2 pt-2 h-auto w-[46vh] md:w-full">
+        <div x-show="view === 'table'" class="text-[#202020] rounded-[6px] -mt-3 md:mt-2 lg:mt-2 pt-2 h-auto w-[46vh] md:w-full">
 
             {{-- Header --}}
+            <div class="mx-0 bg-none w-auto lg:w-full px-2 py-2 lg:px-4 lg:py-2 rounded-lg drop-shadow mb-2 block md:hidden lg:hidden text-start text-[22px] text-sm md:text-lg font-semibold text-[#4AA76F] md:mr-3 lg:mr-1">
+                Road Defect Reports
+            </div>
+
             <div class="px-2 text-center md:text-start"
                  x-data = "{showFilters: false}"
             >
-                <div class="flex">
+                <div class="flex -mt-2 md:mt-0 lg:mt-0">
                     {{ $search_container }}
 
                     <div class="mt-4 pl-4">
@@ -130,17 +170,20 @@
                 <div class="flex">
                     <!-- Dropdown Filters container -->
                     <div x-show="showFilters"
-                         class="mt-4 md:pl-2 flex justify-start items-start space-x-1 mb-0 mr-auto">
+                         class="mt-4 md:pl-2 flex justify-start items-start lg:gap-2 gap-1 mb-0 mr-auto">
                         {{ $dropdown_filters_container }}
                     </div>
 
                     <!--Page description-->
-                    <div x-show="!showFilters" class="pl-6 md:pl-0 flex justify-center items-center md:justified-start md:items-start lg:gap-2 gap-1 md:mb-0 mt-5 mr-auto">
+                    <div x-show="!showFilters" class="hidden md:block lg:block pl-6 md:pl-0 flex justify-center items-center md:justified-start md:items-start lg:gap-2 gap-1 md:mb-0 mt-7 mr-auto">
                         {{ $table_page_description }}
                     </div>
 
-                    {{-- Action Buttons container --}}
-                    {{ $action_buttons_container }}
+                    <div>
+                        {{-- Action Buttons container --}}
+                        {{ $action_buttons_container }}
+                    </div>
+
                 </div>
             </div>
 
@@ -148,7 +191,7 @@
             <div class="mt-2 px-4 mb-2">
 
                 {{-- Table Container --}}
-                <div>
+                <div class="h-[30vh] md:h-[52vh] lg:h-[55vh] xl:h-[62vh] xl:max-h-[100vh] overflow-y-auto ">
                     {{ $table_container }}
                 </div>
 

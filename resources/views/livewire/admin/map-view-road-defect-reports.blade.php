@@ -22,6 +22,7 @@
     <x-slot:dropdown_filters_container>
 
         <!-- All Reports Button -->
+        <!-- All Reports Button -->
         <div
             @click="
                 activeFilter = 'all';
@@ -32,18 +33,26 @@
                 selectedStatus = '';
                 selectedDefect = '';
                 selectedSeverity = '';
-                if ($refs.startDate?._flatpickr) $refs.startDate._flatpickr.clear();
-                if ($refs.endDate?._flatpickr) $refs.endDate._flatpickr.clear();
+
+                // Clear dropdowns
+                document.querySelectorAll('select').forEach(select => select.value = '');
+
+                // Clear date pickers
+                if ($refs.start?._flatpickr) $refs.start._flatpickr.clear();
+                if ($refs.end?._flatpickr) $refs.end._flatpickr.clear();
+
+                // Trigger map marker reset
                 filterMarkers('');
             "
-            class="relative rounded-[4px] border transition-all duration-200 ease-in-out transform hover:scale-105 hover:shadow-md"
-            :class="{
+                    class="relative rounded-[4px] border transition-all duration-200 ease-in-out transform hover:scale-105 hover:shadow-md"
+                    :class="{
                 'bg-green-200 bg-opacity-20 text-green-800 border-green-600': activeFilter === 'all',
                 'text-gray-600 border-gray-300 hover:border-[#4AA76F]': activeFilter !== 'all'
             }"
         >
             <span class="text-[12px] block w-full text-center px-2 py-2">All Reports</span>
         </div>
+
 
         <!-- Barangay -->
         <div class="relative flex rounded-[4px] border hover:shadow-md custom-select"
@@ -74,7 +83,7 @@
                 filterMarkers($event.target.value);"
                 @change="activeFilter = 'selectedDefect'"
                 class="text-[12px] w-full bg-transparent border-none focus:ring-0 px-3 py-1 pr-8 rounded focus:outline-none">
-                <option value="" class="text-gray-400 text-[12px]">Road Defect</option>
+                <option value="" class="text-gray-400 text-[12px]">Road Defect Type</option>
                 @foreach($defectTypes as $defect)
                     <option value="{{ $defect }}">{{ $defect }}</option>
                 @endforeach
