@@ -233,7 +233,6 @@ class ResidentSignup extends Component
             SystemLog::create([
                 'transaction_id' => 'None',
                 'action' => 'Sent OTP to ' . $formattedPhone,
-                'type' => 'report_update',
             ]);
             Log::info('SMS dispatched', ['to' => $formattedPhone]);
 

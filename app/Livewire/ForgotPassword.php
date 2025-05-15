@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\SendSMSJob;
 use App\Models\Resident;
+use App\Models\SystemLog;
 use App\Models\User;
 use App\Services\PhilSMSService;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,11 @@ class ForgotPassword extends Component
             $message = 'Hello! Forgot your password? No worries. Here is your verification code: ' . $verificationCode;
 //            $response = $this->smsService->sendSMS($recipient, $message);
             SendSMSJob::dispatch($formattedPhone, $message);
-
+            SystemLog::create([
+                'transaction_id' => 'None',
+                'action' => 'Sent OTP for password reset to ' . $formattedPhone,
+                'type' => 'report_update',
+            ]);
             return $this->redirect('/resident/enter-code', navigate: true);
 
 //            return redirect()->route('EnterCode');
