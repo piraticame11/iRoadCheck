@@ -47,14 +47,14 @@
                                 </div>
 
                                 <div class="text-xs lg:text-sm flex justify-start items-start w-full">
-                                    <div class="w-2/4 md:w-1/4 lg:w-1/5 font-medium text-gray-600">Severity:</div>
-                                    <div class="w-2/4 md:w-3/4 lg:w-4/5">
-                                        {{
-                                            DB::table('severities')
-                                                ->where('id', $report->severity)
-                                                ->value('label')
-                                        }}
-                                    </div>
+{{--                                    <div class="w-2/4 md:w-1/4 lg:w-1/5 font-medium text-gray-600">Severity:</div>--}}
+{{--                                    <div class="w-2/4 md:w-3/4 lg:w-4/5">--}}
+{{--                                        {{--}}
+{{--                                            DB::table('severities')--}}
+{{--                                                ->where('id', $report->severity)--}}
+{{--                                                ->value('label')--}}
+{{--                                        }}--}}
+{{--                                    </div>--}}
 
                                 </div>
 
