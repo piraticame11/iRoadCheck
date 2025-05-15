@@ -74,9 +74,9 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="sticky top-0 z-10 bg-white py-3 px-4 text-xs font-semibold text-[#757575]">
-                                <button class="flex items-end" wire:click="toggleSorting('log_id')">
+                                <button class="flex items-end" wire:click="toggleSorting('id')">
                                     No.
-                                    <div x-cloak x-show="$wire.sort_by === 'log_id'">
+                                    <div x-cloak x-show="$wire.sort_by === 'id'">
                                         <x-arrow-up x-cloak x-show="$wire.sort_direction === 'asc'" />
                                         <x-arrow-down x-cloak x-show="$wire.sort_direction === 'desc'" />
                                     </div>
