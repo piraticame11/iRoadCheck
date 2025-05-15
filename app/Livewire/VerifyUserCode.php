@@ -8,6 +8,7 @@ use App\Models\SystemLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Livewire\Component;
 
 class VerifyUserCode extends Component
@@ -73,7 +74,7 @@ class VerifyUserCode extends Component
         // Resend logic here
         $verificationCode = rand(100000, 999999);
         $resident->code = $verificationCode;
-        $residentPhone = $resident->phone;
+        $residentPhone = Crypt::decryptString($resident->phone);
         $greetings = [
             'Hello! Thanks for signing up for an account. Your verification code is: ',
             'Hi there! We received your request. Your verification code is: ',
