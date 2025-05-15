@@ -91,7 +91,7 @@ class VerifyUserCode extends Component
         SendSMSJob::dispatch($residentPhone, $message);
         SystemLog::create([
             'transaction_id' => 'None',
-            'action' => 'Sent OTP to ' . $residentPhone,
+            'action' => 'Re-sent OTP to ' . $residentPhone,
             'type' => 'report_update',
         ]);
         $resident->save();
