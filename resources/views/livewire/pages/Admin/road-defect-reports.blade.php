@@ -289,7 +289,7 @@
                         <tr class="{{ $loop->iteration % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} hover:bg-gray-100">
                             <td class="px-4 py-3 text-xs">{{ $report->id }}</td>
                             <td class="px-4 py-3 text-xs">{{ $report->defect }}</td>
-                            <td class="px-4 py-3 text-xs truncate max-w-[200px]" title="{{ $report->street }}, {{ $report->purok }} ">
+                            <td class="px-4 py-3 text-xs truncate max-w-[200px]" title="{{ $report->location }} ">
                                 {{ $report->location }}
                             </td>
                             <td class="px-4 py-3 text-xs truncate max-w-[200px]" title="{{ $report->barangay }}">
