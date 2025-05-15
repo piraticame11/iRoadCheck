@@ -1290,7 +1290,6 @@
     <p><span class="font-semibold">Status:</span> ${report.status ?? 'Unknown Status'}</p>
     <p><span class="font-semibold">Report count:</span> ${report.report_count ?? 'No count'}</p>
     <p><span class="font-semibold">Days Ago:</span> ${getDaysAgo(report.date)}</p>
-`;
 
 
                                 `;
