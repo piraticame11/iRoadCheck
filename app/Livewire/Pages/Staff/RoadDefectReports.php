@@ -104,6 +104,7 @@ class RoadDefectReports extends Component
         $this->locationFilter = '';
         $this->start_date = '';
         $this->end_date = '';
+        $this->status = '';
         $this->sort_by = 'id';
         $this->sort_direction = 'asc';
         $this->resetPage();

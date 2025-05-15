@@ -82,50 +82,52 @@
 
     <!-- Draggable Bottom Panel -->
     <div class="block lg:hidden flex justify-center w-full">
-        <div
-            x-data="draggablePanel()"
-            x-bind:style="'height: ' + panelHeight"
-            @touchstart.passive="startDrag($event)"
-            @touchmove.passive="onDrag($event)"
-            @touchend="endDrag"
-            class="fixed bottom-0 w-full bg-green-500 p-1 rounded-t-2xl shadow-lg transition-all duration-300 ease-in-out overflow-hidden flex justify-center z-[99999] pb-20"
-        >
-            <div class="w-full flex flex-col justify-center items-center bg-white rounded-t-xl pl-1 pr-3">
-                <!-- Drag Handle -->
-                <div @click="toggleOpen" class="flex justify-center py-2.5 cursor-pointer touch-none">
-                    <div class="w-12 h-1.5 bg-gray-400 rounded-full"></div>
-                </div>
+        <div class="w-full pb-3">
+            <div
+                x-data="draggablePanel()"
+                x-bind:style="'height: ' + panelHeight"
+                @touchstart.passive="startDrag($event)"
+                @touchmove.passive="onDrag($event)"
+                @touchend="endDrag"
+                class="fixed bottom-0 w-full bg-green-500 p-1 rounded-t-2xl shadow-lg transition-all duration-300 ease-in-out overflow-hidden flex justify-center z-[99999]"
+            >
+                <div class="w-full flex flex-col justify-center items-center bg-white rounded-t-xl pl-1 pr-3">
+                    <!-- Drag Handle -->
+                    <div @click="toggleOpen" class="flex justify-center py-2.5 cursor-pointer touch-none">
+                        <div class="w-12 h-1.5 bg-gray-400 rounded-full"></div>
+                    </div>
 
-                <!-- Panel Content -->
-                <div @click="toggleOpen" class="overflow-y-auto h-[calc(100%-2rem)] px-0 w-full">
-                    <!-- Optional Search + Filters -->
-                    <div x-data="{ showFilters: false }" class="flex flex-col gap-3">
-                        <!-- ✅ Expand panel when clicking search -->
-                        <div class="relative flex flex-1 w-full pt-2 py-3 pb-0 -mt-1" >
-                            {{ $search_container }}
-                        </div>
-                        <!-- Dropdown Filters -->
-                        <div x-show="showFilters" class="hidden border-t pt-2">
-                            <div x-data="{ activeFilter: '', query: '' }"
-                                 class="flex flex-wrap justify-start items-start gap-2">
-                                {{ $dropdown_filters_container }}
+                    <!-- Panel Content -->
+                    <div @click="toggleOpen" class="overflow-y-auto h-[calc(100%-2rem)] px-0 w-full">
+                        <!-- Optional Search + Filters -->
+                        <div x-data="{ showFilters: false }" class="flex flex-col gap-3">
+                            <!-- ✅ Expand panel when clicking search -->
+                            <div class="relative flex flex-1 w-full pt-2 py-3 pb-0 -mt-1" >
+                                {{ $search_container }}
                             </div>
-                        </div>
+                            <!-- Dropdown Filters -->
+                            <div x-show="showFilters" class="hidden border-t pt-2">
+                                <div x-data="{ activeFilter: '', query: '' }"
+                                     class="flex flex-wrap justify-start items-start gap-2">
+                                    {{ $dropdown_filters_container }}
+                                </div>
+                            </div>
 
-                        <!-- Report Information -->
-                        <div class="w-full mx-auto flex flex-1 overflow-y-auto min-h-[25vh] max-h-[60vh] pb-16">
-                            <div class="w-full pb-16 mt-6 px-6">
-                                <div class="space-y-2">
-                                    {{ $comprehensive_or_group_report_information }}
-                                    {{ $individual_report_information }}
+                            <!-- Report Information -->
+                            <div class="w-full mx-auto flex flex-1 overflow-y-auto min-h-[25vh] max-h-[60vh] pb-16">
+                                <div class="w-full pb-16 mt-6 px-6">
+                                    <div class="space-y-2">
+                                        {{ $comprehensive_or_group_report_information }}
+                                        {{ $individual_report_information }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
@@ -136,11 +138,11 @@
                 startY: 0,
                 currentY: 0,
                 totalDrag: 0,
-                panelHeight: '180px',
+                panelHeight: '200px',
                 isDragging: false,
-                minHeight: 180, // in px
-                maxHeight: window.innerHeight * 0.85, // 80%
-                fullHeight: '80vh',
+                minHeight: 200, // in px
+                maxHeight: window.innerHeight * 0.9, // 80%
+                fullHeight: '100vh',
                 isOpen: false,
                 dragThreshold: 30, // This small threshold determines snap action
 
