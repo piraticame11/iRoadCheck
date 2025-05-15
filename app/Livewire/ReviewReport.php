@@ -222,6 +222,15 @@ class ReviewReport extends Component
                                 'type' => 'report_update',
                             ]);
                         }
+                        try{
+                            SystemLog::create([
+                                'transaction_id' => $suggest->id,
+                                'action' => 'Report suggest ID ' . $suggest->id . ' was grouped with existing Report ID '. $existingReport->id . ' based on location and defect similarity.',
+                                'type' => 'report_update',
+                            ]);
+                        } catch (\Exception $e) {
+
+                        }
 
                         // Perform update
                         DB::table('reports')
