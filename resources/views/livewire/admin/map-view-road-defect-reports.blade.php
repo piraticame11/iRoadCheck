@@ -1275,8 +1275,14 @@
                                     <p><span class="font-semibold">Date Reported:</span> ${report.formatted_date ?? 'Unknown Date'}</p>
                                     <p><span class="font-semibold">Status:</span> ${report.status ?? 'Unknown Status'}</p>
                                     <p><span class="font-semibold">Report count:</span> ${report.report_count ?? report.report_count  ?? 'No count'}</p>
-                                    <p><span class="font-semibold">Days Ago:</span> ${report.days_ago ?? 'N/A'}</p>
-                                `;
+                                    @php
+                                    $days = \Carbon\Carbon::parse($report->date)->diffInDays();
+                                @endphp
+                                <p><span class="font-semibold">Days Ago:</span>
+{{ $days === 0 ? 'Today' : ($days === 1 ? '1 day ago' : $days . ' days ago') }}
+                                </p>
+
+`;
 
                                 detail.addEventListener("click", () => {
                                     this.viewReport(report.id);
