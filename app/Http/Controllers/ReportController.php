@@ -336,20 +336,11 @@ class ReportController extends Controller
             $jsonData = json_decode(file_get_contents($jsonPath), true);
 
             if (!empty($jsonData['prediction'])) {
-                $predictions = collect($jsonData['prediction'])
-                    ->sortByDesc(fn($p) => $p['rect']['width'] * $p['rect']['height']);
+                $largest = collect($jsonData['prediction'])
+                    ->sortByDesc(fn($p) => $p['rect']['width'] * $p['rect']['height'])
+                    ->first();
 
-                $names = $predictions->pluck('name')->values();
-                $uniqueNames = $names->unique();
-
-                if ($uniqueNames->isNotEmpty()) {
-                    $mainDefect = ucfirst($uniqueNames->first());
-                    $issue_name = $uniqueNames->count() > 1
-                        ? "$mainDefect"
-                        : $mainDefect;
-                } else {
-                    $issue_name = 'Unknown';
-                }
+                $issue_name = $largest ? ucfirst($largest['name']) : 'Unknown';
             } else {
                 return redirect()->back()->with('no_defect_modal_open', true);
             }
