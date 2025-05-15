@@ -3,7 +3,7 @@
     @php
         use App\Models\Staff;use App\Models\StaffRolesPermissions;$user = \Auth::user();
         $staff = Staff::where('user_id', $user->id)->first();
-        $roleId = $staff?->staffRolesPermissions?->staffRole?->id ?? null;
+        $roleId = $staff?->staffRole?->id ?? null;
         $hasPermission = false;
 
         if ($roleId) {
