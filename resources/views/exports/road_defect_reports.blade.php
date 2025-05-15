@@ -97,7 +97,16 @@
             <td style="border: 1px solid #101010; text-align: left;">{{ $report->status}}</td>
             <td style="border: 1px solid #101010; text-align: center;">{{ $report->report_count ?? 1 }}</td>
 {{--            <td style="border: 1px solid #101010; text-align: left;">{{ \App\Models\Severity::find($report->label)?->label ?? 'N/A' }}</td>--}}
-            <td style="border: 1px solid #101010; text-align: left;">{{ $report->updater?->first_name . ' ' . $report->updater?->last_name ?? 'N/A' }}</td>
+            @php
+
+                $firstName = $report->updater?->first_name ? Crypt::decryptString($report->updater->first_name) : null;
+                $lastName = $report->updater?->last_name ? Crypt::decryptString($report->updater->last_name) : null;
+            @endphp
+
+            <td style="border: 1px solid #101010; text-align: left;">
+                {{ $firstName && $lastName ? $firstName . ' ' . $lastName : 'N/A' }}
+            </td>
+
             <td style="border: 1px solid #101010; text-align: left;">
                 {{ $report->updated_at ? \Carbon\Carbon::parse($report->updated_at)->format('F j, Y') : 'N/A' }}
             </td>

@@ -255,15 +255,15 @@
                                 </div>
                             </button>
                         </th>
-                        <th scope="col" class="sticky top-0 z-10 bg-white py-3 px-4 text-xs font-semibold text-[#757575]">
-                            <button class="flex items-end" wire:click="toggleSorting('severity.label')">
-                                Level
-                                <div x-cloak x-show="$wire.sort_by === 'severity.label'">
-                                    <x-arrow-up x-cloak x-show="$wire.sort_direction === 'asc'" />
-                                    <x-arrow-down x-cloak x-show="$wire.sort_direction === 'desc'" />
-                                </div>
-                            </button>
-                        </th>
+{{--                        <th scope="col" class="sticky top-0 z-10 bg-white py-3 px-4 text-xs font-semibold text-[#757575]">--}}
+{{--                            <button class="flex items-end" wire:click="toggleSorting('severity.label')">--}}
+{{--                                Level--}}
+{{--                                <div x-cloak x-show="$wire.sort_by === 'severity.label'">--}}
+{{--                                    <x-arrow-up x-cloak x-show="$wire.sort_direction === 'asc'" />--}}
+{{--                                    <x-arrow-down x-cloak x-show="$wire.sort_direction === 'desc'" />--}}
+{{--                                </div>--}}
+{{--                            </button>--}}
+{{--                        </th>--}}
                         <th scope="col" class="sticky top-0 z-10 bg-white py-3 px-4 text-xs font-semibold text-[#757575]">
                             <button class="flex items-end">
                                 Updated Report By
@@ -298,7 +298,7 @@
                             <td class="px-4 py-3 text-xs">{{ $report->date ? \Carbon\Carbon::parse($report->date)->format('F j, Y') : 'N/A' }}</td>
                             <td class="px-4 py-3 text-xs font-semibold" style="color: {{ $color }};">{{ $report->status }}</td>
                             <td class="px-4 py-3 text-xs">{{ $report->report_count }}</td>
-                            <td class="px-4 py-3 text-xs font-medium italic">{{ $report->severity->label ?? 'N/A' }}</td>
+{{--                            <td class="px-4 py-3 text-xs font-medium italic">{{ $report->severity->label ?? 'N/A' }}</td>--}}
                             <td class="px-4 py-3 text-xs">{{ $report->updated_by }}</td>
                             <td class="px-2 py-3 text-[11px] lg:text-xs">
                                 <button class="flex items-center text-[#3251FF] hover:text-[#1d3fcc] font-medium text-xs transition active:scale-95 hover:bg-blue-100 hover:shadow py-1 px-3 rounded-md"
