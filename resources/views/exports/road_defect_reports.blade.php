@@ -73,7 +73,7 @@
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Time Reported</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 100px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Road Status</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 100px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Report Count</th>
-        <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 80px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Level</th>
+{{--        <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 80px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Level</th>--}}
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 160px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Updated Report By</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Date Updated</th>
         <th style="border: 1px solid #FFFFFF; background-color: #000000; color: #FFFFFF; width: 120px; font-family: 'Arial', sans-serif; font-size: 10px; text-align: center; font-weight:bold ">Time Updated</th>
@@ -92,11 +92,11 @@
                 {{ $report->date ? \Carbon\Carbon::parse($report->date)->format('F j, Y') : 'N/A' }}
             </td>
             <td style="border: 1px solid #101010; text-align: left;">
-                {{ $report->time_reported ? \Carbon\Carbon::parse($report->time_reported)->format('h:i A') : 'N/A' }}
+                {{ $report->time_reported ? \Carbon\Carbon::parse($report->time)->format('h:i A') : 'N/A' }}
             </td>
             <td style="border: 1px solid #101010; text-align: left;">{{ $report->status}}</td>
             <td style="border: 1px solid #101010; text-align: center;">{{ $report->report_count ?? 1 }}</td>
-            <td style="border: 1px solid #101010; text-align: left;">{{ \App\Models\Severity::find($report->label)?->label ?? 'N/A' }}</td>
+{{--            <td style="border: 1px solid #101010; text-align: left;">{{ \App\Models\Severity::find($report->label)?->label ?? 'N/A' }}</td>--}}
             <td style="border: 1px solid #101010; text-align: left;">{{ $report->updater?->first_name . ' ' . $report->updater?->last_name ?? 'N/A' }}</td>
             <td style="border: 1px solid #101010; text-align: left;">
                 {{ $report->updated_at ? \Carbon\Carbon::parse($report->updated_at)->format('F j, Y') : 'N/A' }}
