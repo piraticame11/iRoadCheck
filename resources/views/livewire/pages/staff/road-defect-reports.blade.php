@@ -118,7 +118,7 @@
                         @change="activeFilter = 'severityFilter'"
                         class="text-[12px] block appearance-none w-full bg-transparent border-none focus:ring-0 px-3 py-1 pr-8 rounded shadow-none focus:outline-none focus:scale-105"
                     >
-                        <option value="" class="text-gray-400 text-[12px]">Severity</option>
+                        <option value="" class="text-gray-400 text-[12px]">Level</option>
                         @foreach($severities as $label)
                             <option value="{{ $label }}">{{ $label }}</option>
                         @endforeach
