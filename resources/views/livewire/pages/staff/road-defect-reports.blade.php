@@ -284,7 +284,7 @@
                             <td class="px-4 py-3 text-xs">{{ $report->id }}</td>
                             <td class="px-4 py-3 text-xs">{{ $report->defect }}</td>
                             <td class="px-4 py-3 text-xs truncate max-w-[200px]" title="{{ $report->street }}, {{ $report->purok }} ">
-                                {{ $report->street }}, {{ $report->purok }}
+                                {{ $report->location }}
                             </td>
                             <td class="px-4 py-3 text-xs truncate max-w-[200px]" title="{{ $report->barangay }}">
                                 {{ $report->barangay }}
