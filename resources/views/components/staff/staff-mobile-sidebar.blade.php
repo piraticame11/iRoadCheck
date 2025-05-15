@@ -22,9 +22,9 @@
         }
     @endphp
 
-    @if ($hasPermission)
-        {{-- show dashboard content --}}
-    @endif
+{{--    @if ($hasPermission)--}}
+{{--        --}}{{-- show dashboard content --}}
+{{--    @endif--}}
     <!-- Dashboard -->
     @if ($hasPermissionDashboard)
         <a href="{{ route('staff.dashboard') }}" wire:navigate
