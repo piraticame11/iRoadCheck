@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\SendSMSJob;
 use App\Models\Resident;
+use App\Models\SystemLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -87,6 +88,11 @@ class VerifyUserCode extends Component
         // Final message
         $message = $randomGreeting . $verificationCode;
         SendSMSJob::dispatch($residentPhone, $message);
+        SystemLog::create([
+            'transaction_id' => 'None',
+            'action' => 'Sent OTP to ' . $residentPhone,
+            'type' => 'report_update',
+        ]);
         $resident->save();
 
         $this->code = null;
