@@ -1274,7 +1274,7 @@
                                     <p><span class="font-semibold">Location:</span> ${report.location ?? 'Unknown Location'}</p>
                                     <p><span class="font-semibold">Date Reported:</span> ${report.formatted_date ?? 'Unknown Date'}</p>
                                     <p><span class="font-semibold">Status:</span> ${report.status ?? 'Unknown Status'}</p>
-                                    <p><span class="font-semibold">Severity:</span> ${report.severity_label ?? report.severity ?? 'Unknown Severity'}</p>
+                                    <p><span class="font-semibold">Report count:</span> ${report.report_count ?? report.report_count  ?? 'No count'}</p>
                                     <p><span class="font-semibold">Days Ago:</span> ${report.days_ago ?? 'N/A'}</p>
                                 `;
 

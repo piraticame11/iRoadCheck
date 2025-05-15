@@ -48,8 +48,17 @@ class MapViewRoadDefectReports extends Component
                     : null;
 
                 $report->days_ago = $report->date
-                    ? Carbon::parse($report->date)->diffInDays(now()) . ' days ago'
+                    ? (function () use ($report) {
+                        $days = Carbon::parse($report->date)->diffInDays(now());
+
+                        return match(true) {
+                            $days === 0 => 'Today',
+                            $days === 1 => '1 day ago',
+                            default => "$days days ago",
+                        };
+                    })()
                     : null;
+
 
                 $report->severity_label = $report->severity ?? 'Unknown';
 
