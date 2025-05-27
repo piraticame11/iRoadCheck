@@ -6,6 +6,7 @@ use AllowDynamicProperties;
 use App\Models\Notification;
 use App\Models\Report;
 use App\Models\Staff;
+use App\Models\StaffLog;
 use App\Models\Suggestion;
 use App\Models\TemporaryUpdate;
 use App\Models\User;
@@ -165,6 +166,14 @@ use Livewire\Component;
                     'notifiable_id' => $reporter->id,
                     'notifiable_type' => User::class,
                     'is_read' => false,
+                ]);
+                // Log the update action for auditing purposes
+                $user = Auth::user();
+                StaffLog::create([
+                    'staff_id' => $user->id,
+                    'action' => "Updated a report at {$temporaryUpdate->location}",
+                    'dateTime' => now(),
+                    'user_id' => $user->id,
                 ]);
             } catch (\Exception $e) {
                 Log::warning('Notification to reporter failed: ' . $e->getMessage());

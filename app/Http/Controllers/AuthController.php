@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminLog;
+use App\Models\StaffLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -162,6 +164,19 @@ class AuthController extends Controller
     // Log the Admin user out
     public function Logout()
     {
+        $user = Auth::user();
+        try {
+            AdminLog::create([
+                'admin_id' => $user->id,
+                'action' => 'Logged out.',
+                'dateTime' => now(),
+                'user_id' => $user->id,
+            ]);
+        }
+        catch (\Exception $e) {
+
+        }
+
         Auth::logout();
         return redirect()->route('admin-sign-in-show')->with('success', 'You have been logged out successfully.');
     }
@@ -231,6 +246,18 @@ class AuthController extends Controller
 
         // Step 6: Check if password needs to be changed after login
         $user = Auth::user(); // get logged in user
+        try {
+            $user = Auth::user();
+            StaffLog::create([
+                'staff_id' => $user->id,
+                'action' => "Logged in",
+                'dateTime' => now(),
+                'user_id' => $user->id,
+            ]);
+        }
+        catch (\Exception $e) {
+
+        }
         if ($user->must_change_password) {
             return redirect()->route('staff.password.change');
         }
@@ -271,6 +298,18 @@ class AuthController extends Controller
 
     public function LogoutStaff()
     {
+        try {
+            $user = Auth::user();
+            StaffLog::create([
+                'staff_id' => $user->id,
+                'action' => "Logged out",
+                'dateTime' => now(),
+                'user_id' => $user->id,
+            ]);
+        }
+        catch (\Exception $e) {
+
+        }
         Auth::logout(); // Log the user out
         return redirect()->route('staff-sign-in-show')->with('success', 'You have been logged out successfully.');
     }

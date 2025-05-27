@@ -125,18 +125,18 @@
                                 </div>
 
                                 <!-- Sex -->
-                                <div class="relative mb-5 lg:mr-5 custom-select w-[195px] sm:w-[290px] md:w-auto border-2 border-gray-300 rounded-lg md:mr-3">
-                                    <select id="sex" required
-                                            class="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#4AA76F] focus:border-[#4AA76F] peer invalid:border-red-500 transition-all">
-                                        <option value="" disabled selected class="text-gray-500 hover:bg-gray-100">Select Sex</option>
-                                        <option value="male" class="text-gray-700 hover:bg-gray-100">Male</option>
-                                        <option value="female" class="text-gray-700 hover:bg-gray-100">Female</option>
-                                    </select>
-                                    <label for="sex"
-                                           class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">
-                                        Sex
-                                    </label>
-                                </div>
+{{--                                <div class="relative mb-5 lg:mr-5 custom-select w-[195px] sm:w-[290px] md:w-auto border-2 border-gray-300 rounded-lg md:mr-3">--}}
+{{--                                    <select id="sex" required--}}
+{{--                                            class="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#4AA76F] focus:border-[#4AA76F] peer invalid:border-red-500 transition-all">--}}
+{{--                                        <option value="" disabled selected class="text-gray-500 hover:bg-gray-100">Select Sex</option>--}}
+{{--                                        <option value="male" class="text-gray-700 hover:bg-gray-100">Male</option>--}}
+{{--                                        <option value="female" class="text-gray-700 hover:bg-gray-100">Female</option>--}}
+{{--                                    </select>--}}
+{{--                                    <label for="sex"--}}
+{{--                                           class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4">--}}
+{{--                                        Sex--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
 
                             </div>
 
