@@ -259,7 +259,7 @@
                                     <img
                                         :src="selectedReport.image_annotated ? `/storage/${selectedReport.image_annotated}` : '/images/placeholder.png'"
                                         alt="Defect Image"
-                                        class="w-full h-auto
+                                        class="w-full h-full
                                          rounded-[10px] object-contain cursor-pointer"
                                         :style="`transform: scale(${scale}) translate(${offsetX}px, ${offsetY}px); transform-origin: center; transition: transform 0.1s ease-out;`"/>
                                 </x-slot:image>
