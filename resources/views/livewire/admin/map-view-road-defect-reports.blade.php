@@ -1112,7 +1112,7 @@
                         const reportCount = reports.length;
 
                         const marker = L.circleMarker([avgLat, avgLng], {
-                            color: 'blue',
+                            color: 'red',
                             weight: 1,
                             radius: 8 + Math.log2(reportCount) * 2,
                             fillColor: 'blue',

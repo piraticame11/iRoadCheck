@@ -5,6 +5,7 @@ namespace App\Livewire;
 
 use App\Models\Notification;
 use App\Models\Report;
+use App\Models\ResidentLog;
 use App\Models\Staff;
 use App\Models\Suggestion;
 use App\Models\SystemLog;
@@ -141,6 +142,14 @@ class ReviewReport extends Component
                     'notifiable_type' => User::class,
                     'is_read' => false,
                 ]);
+                try {
+                    ResidentLog::create([
+                        'resident_id' => $reporter->id,
+                        'action' => "Submitted a road report ID {$report->id}",
+                        'dateTime' => now(),
+                    ]);
+                }
+                catch (\Exception $e) {}
 
                 // Optionally delete the temporary report after copying
                 session()->flash('feedback', 'Report submitted successfully!');
@@ -173,6 +182,14 @@ class ReviewReport extends Component
                             'image_annotated' => $temporaryReport->image_annotated ?? null,
                             'status' => "Unfixed"
                         ]);
+                        try {
+                            ResidentLog::create([
+                                'resident_id' => $userId,
+                                'action' => "Logged in",
+                                'dateTime' => now(),
+                            ]);
+                        }
+                        catch (\Exception $e) {}
                     } catch (\Exception $e) {
                         throw new \Exception('Failed to create suggestion: ' . $e->getMessage());
                     }
