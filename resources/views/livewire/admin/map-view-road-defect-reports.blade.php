@@ -1558,7 +1558,7 @@
                 // If moving the map is required
                 if (!isSameLocation || !isSameZoom) {
                     this.map.on('moveend', openPopupAfterMove);
-                    this.map.setView(latLng, 18, { animate: true });
+                    this.map.setView(latLng, currentZoom, { animate: true });
                 } else {
                     newSelectedReport.marker?.openPopup();
 
