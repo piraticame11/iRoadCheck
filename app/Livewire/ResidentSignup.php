@@ -141,7 +141,7 @@ class ResidentSignup extends Component
                 'step' => $this->step,
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
-                'sex' => $this->sex,
+//                'sex' => $this->sex,
                 'phone' => $this->phone,
                 'phoneError' => $this->phoneError
             ]
@@ -190,7 +190,7 @@ class ResidentSignup extends Component
                 'first_name' => Crypt::encryptString($this->first_name),
                 'middle_name' => $this->middle_name ? Crypt::encryptString($this->middle_name) : null,
                 'last_name' => Crypt::encryptString($this->last_name),
-                'sex' => Crypt::encryptString($this->sex),
+//                'sex' => Crypt::encryptString($this->sex),
                 'user_type' => 2, // Resident type
                 'password' => bcrypt($this->password),
             ]);

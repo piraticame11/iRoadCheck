@@ -4,7 +4,6 @@
         errors: {
             first_name: false,
             last_name: false,
-            sex: false,
             phone: false,
             password: false,
             confirmPassword: false
@@ -14,8 +13,6 @@
                 this.errors.first_name = !document.getElementById('first_name').value.trim();
             } else if (field === 'last_name') {
                 this.errors.last_name = !document.getElementById('last_name').value.trim();
-            } else if (field === 'sex') {
-                this.errors.sex = !document.getElementById('sex').value;
             } else if (field === 'phone') {
                 const phoneInput = document.getElementById('phone');
                 this.errors.phone = !phoneInput.value.match(/^0[0-9]{10}$/);
@@ -34,7 +31,6 @@
         validateStep1() {
             this.validateField('first_name');
             this.validateField('last_name');
-            this.validateField('sex');
 
             if (!this.errors.first_name && !this.errors.last_name && !this.errors.sex) {
                 this.step = 2;
@@ -143,21 +139,21 @@
                     <p x-show="errors.last_name" class="text-red-500 text-[12px] mt-1">Last name is required</p>
 
                     <!-- Sex -->
-                    <div class="relative mb-5 custom-select w-full border-2 border-gray-300 rounded-lg">
-                        <select id="sex" required name="sex" wire:model="sex"
-                            class="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#4AA76F] focus:border-[#4AA76F] peer invalid:border-red-500 transition-all"
-                            :class="{ 'border-red-500': errors.sex }" @change="validateField('sex')">
-                            <option value="" disabled selected class="text-gray-500 hover:bg-gray-100">Select Sex
-                            </option>
-                            <option value="male" class="text-gray-700 hover:bg-gray-100">Male</option>
-                            <option value="female" class="text-gray-700 hover:bg-gray-100">Female</option>
-                        </select>
-                        <label for="sex"
-                            class="absolute text-sm text-gray-500 duration-300 transform -translate-x-28 md:-translate-x-36 -translate-y-4 scale-75 top-1 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-4">
-                            Sex
-                        </label>
-                    </div>
-                    <p x-show="errors.sex" class="text-red-500 text-[12px] mt-1">Please select a sex</p>
+{{--                    <div class="relative mb-5 custom-select w-full border-2 border-gray-300 rounded-lg">--}}
+{{--                        <select id="sex" required name="sex" wire:model="sex"--}}
+{{--                            class="block px-2.5 pb-2 pt-2.5 w-full text-sm text-gray-900 rounded-lg bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-[#4AA76F] focus:border-[#4AA76F] peer invalid:border-red-500 transition-all"--}}
+{{--                            :class="{ 'border-red-500': errors.sex }" @change="validateField('sex')">--}}
+{{--                            <option value="" disabled selected class="text-gray-500 hover:bg-gray-100">Select Sex--}}
+{{--                            </option>--}}
+{{--                            <option value="male" class="text-gray-700 hover:bg-gray-100">Male</option>--}}
+{{--                            <option value="female" class="text-gray-700 hover:bg-gray-100">Female</option>--}}
+{{--                        </select>--}}
+{{--                        <label for="sex"--}}
+{{--                            class="absolute text-sm text-gray-500 duration-300 transform -translate-x-28 md:-translate-x-36 -translate-y-4 scale-75 top-1 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-4">--}}
+{{--                            Sex--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
+{{--                    <p x-show="errors.sex" class="text-red-500 text-[12px] mt-1">Please select a sex</p>--}}
                 </div>
 
                 <button @click="validateStep1()" type="button"
