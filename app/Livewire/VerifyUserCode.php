@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\SendSMSJob;
 use App\Models\Resident;
+use App\Models\ResidentLog;
 use App\Models\SystemLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -38,7 +39,15 @@ class VerifyUserCode extends Component
 
             $resident->is_activated = 1;
             $resident->save();
-
+            $user = Auth::user();
+            try {
+                ResidentLog::create([
+                    'resident_id' => $user->id,
+                    'action' => "Signed up",
+                    'dateTime' => now(),
+                ]);
+            }
+            catch (\Exception $e) {}
             // Optionally, you can log the user in or redirect them to the dashboard
             session()->flash('success', 'Account activated successfully!');  // Set session message
             return $this->redirect(route('resident.dashboard'), navigate: true);  // Redirect and trigger frontend navigation
