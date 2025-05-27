@@ -19,7 +19,7 @@ class ResidentSignup extends Component
     public $first_name = '';
     public $middle_name = '';
     public $last_name = '';
-    public $sex = '';
+//    public $sex = '';
     public $phone = '';
     public $password = '';
     public $confirmPassword = '';
@@ -37,7 +37,7 @@ class ResidentSignup extends Component
         'first_name' => 'required|string|max:255',
         'middle_name' => 'nullable|string|max:255',
         'last_name' => 'required|string|max:255',
-        'sex' => 'required|in:male,female',
+//        'sex' => 'required|in:male,female',
         'phone' => 'required|regex:/^0[0-9]{10}$/|size:11',
         'password' => [
             'required',
