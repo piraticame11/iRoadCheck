@@ -1123,7 +1123,7 @@
                         const marker = L.circleMarker([avgLat, avgLng], {
                             color: hasNewReportToday ? 'red' : '#ccc',
                             weight: 1,
-                            radius: 50,
+                            radius: 20,
                             fillColor: markerColor,
                             fillOpacity: hasNewReportToday ? 0.7 : 0.0
                         }).addTo(this.map);
