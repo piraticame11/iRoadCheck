@@ -1111,12 +1111,21 @@
                         const avgLng = lngSum / reports.length;
                         const reportCount = reports.length;
 
+                        // Get today's date in YYYY-MM-DD format
+                        const today = new Date().toISOString().split('T')[0];
+
+// Check if there's at least one report today
+                        const hasNewReportToday = reports.some(r => r.created_at.startsWith(today));
+
+// Define marker color based on today's report
+                        const markerColor = hasNewReportToday ? 'red' : 'transparent';
+
                         const marker = L.circleMarker([avgLat, avgLng], {
-                            color: 'red',
+                            color: hasNewReportToday ? 'red' : '#ccc',
                             weight: 1,
                             radius: 8 + Math.log2(reportCount) * 2,
-                            fillColor: 'blue',
-                            fillOpacity: 0.7
+                            fillColor: markerColor,
+                            fillOpacity: hasNewReportToday ? 0.7 : 0.0
                         }).addTo(this.map);
 
                         const label = L.divIcon({
