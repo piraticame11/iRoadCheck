@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminLog;
+use App\Models\ResidentLog;
 use App\Models\StaffLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -316,6 +317,15 @@ class AuthController extends Controller
 
     public function LogoutResident()
     {
+        $user = Auth::user();
+        try {
+            ResidentLog::create([
+                'resident_id' => $user->id,
+                'action' => "Logged out",
+                'dateTime' => now(),
+            ]);
+        }
+        catch (\Exception $e) {}
         Auth::logout(); // Log the user out
         return redirect()->route('residents-login')->with('success', 'You have been logged out successfully.');
     }
