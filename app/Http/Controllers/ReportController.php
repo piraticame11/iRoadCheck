@@ -424,7 +424,7 @@ class ReportController extends Controller
         $timestamp = time();
         $imageName = "update_photo_{$timestamp}.png";
 //        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
-        $jsonPath = storage_path("app/public/temporary/update_photo_{$timestamp}.json");
+        $jsonPath = storage_path("app/public/updates/update_photo_{$timestamp}.json");
 
         // Save image
         $imagepaths = Storage::disk('public')->put("temporary/{$imageName}", $image);
