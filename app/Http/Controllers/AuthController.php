@@ -38,9 +38,8 @@ class AuthController extends Controller
             if (Auth::attempt(['email' => $adminUser->email, 'password' => $request->password])) {
                 AdminLog::create([
                     'admin_id' => $adminUser->id,
-                    'action' => 'Logged out.',
+                    'action' => 'Logged in.',
                     'dateTime' => now(),
-                    'user_id' => $adminUser->id,
                 ]);
                 return redirect()->route('admin.dashboard'); // Adjust as needed
             }
