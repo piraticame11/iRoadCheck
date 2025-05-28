@@ -345,7 +345,7 @@ class ReportController extends Controller
                 return redirect()->back()->with('no_defect_modal_open', true);
             }
         }else{
-            return redirect()->back()->with('no_defect_modal_open', true);
+            return redirect()->back()->with('ai_is_off', true);
         }
 
 
@@ -423,8 +423,8 @@ class ReportController extends Controller
         // Generate filenames
         $timestamp = time();
         $imageName = "update_photo_{$timestamp}.png";
-        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
-        $jsonPath = storage_path("app/public/output/reports/report_photo_{$timestamp}.json");
+//        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
+        $jsonPath = storage_path("app/public/temporary/update_photo_{$timestamp}.json");
 
         // Save image
          Storage::disk('public')->put("temporary/{$imageName}", $image);
@@ -447,7 +447,7 @@ class ReportController extends Controller
 
             }
         }else{
-            return redirect()->back()->with('no_defect_modal_open', true);
+            return redirect()->back()->with('ai_is_off', true);
         }
 
 //        return redirect()->back()->with('no_defect_modal_open', true);
