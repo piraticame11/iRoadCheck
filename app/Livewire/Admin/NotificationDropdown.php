@@ -36,7 +36,7 @@ class NotificationDropdown extends Component
     {
         $this->notifications = Notification::with(['report']) // Removed 'staff' since no `notifiable_type`
         ->where('notifiable_id', auth()->id())
-            ->where('is_read', 0)
+            ->where('is_read', false)
             ->orderByDesc('created_at')
             ->get();
 
