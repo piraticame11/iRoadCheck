@@ -29,6 +29,7 @@
                         <livewire:no-defect-modal/>
                         <livewire:not-from-tagum/>
                         <livewire:first-login-modal/>
+                        <livewire:ai-is-off/>
 
                         <!-- "How to Capture Road Issue" link to reopen modal -->
                         <button wire:click="$dispatch('openFirstLoginModal')" class="mt-3 text-blue-600 underline text-sm">

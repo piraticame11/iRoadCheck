@@ -25,10 +25,10 @@
                 </div>
 
                 <!-- Heading -->
-                <h2 class="text-2xl font-extrabold text-red-700 tracking-wide uppercase">Road is still not fixed!</h2>
+                <h2 class="text-2xl font-extrabold text-red-700 tracking-wide uppercase">Scanning Failed!</h2>
 
                 <!-- Optional message -->
-                <p class="text-sm text-gray-600 px-4">Please ensure the road has been repaired before retrying the capture.</p>
+                <p class="text-sm text-gray-600 px-4">Ai is turned off. Please contact tech support.</p>
 
                 <!-- Buttons -->
                 <div class="flex justify-center gap-4 pt-4">

@@ -23,6 +23,7 @@
                             <livewire:review-update/>
                             <livewire:no-defect-modal/>
                             <livewire:dont-allow-update/>
+                            <livewire:ai-is-off/>
                             {{--                            <livewire:first-login-modal/>--}}
 
                             <!-- "How to Capture Road Issue" link to reopen modal -->

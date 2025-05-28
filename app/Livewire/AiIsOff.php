@@ -4,13 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class DontAllowUpdate extends Component
+class AiIsOff extends Component
 {
     public $isOpen = false;
     public function mount()
     {
         // Open modal if session exists
-        if (session()->has('dont_allow_update_open')) {
+        if (session()->has('ai_is_off')) {
             $this->isOpen = true;
         }
     }
@@ -18,11 +18,10 @@ class DontAllowUpdate extends Component
     public function closeModal()
     {
         $this->isOpen = false;
-        session()->forget('dont_allow_update_open');
+        session()->forget('ai_is_off');
     }
-
     public function render()
     {
-        return view('livewire.dont-allow-update');
+        return view('livewire.ai-is-off');
     }
 }
