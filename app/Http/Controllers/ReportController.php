@@ -423,14 +423,32 @@ class ReportController extends Controller
         // Generate filenames
         $timestamp = time();
         $imageName = "update_photo_{$timestamp}.png";
-//        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
-//        $jsonPath = storage_path("app/public/output/reports/report_photo_{$timestamp}.json");
+        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
+        $jsonPath = storage_path("app/public/output/reports/report_photo_{$timestamp}.json");
 
         // Save image
-         Storage::disk('public')->put("updates/{$imageName}", $image);
+         Storage::disk('public')->put("temporary/{$imageName}", $image);
         $fullImagePath = "updates/{$imageName}";
         // Wait for the JSON file to be
+        $timeout = 10; // Max wait time in seconds
+        $startTime = time();
 
+        while (!file_exists($jsonPath) && (time() - $startTime) < $timeout) {
+            usleep(500000); // Wait 0.5 seconds before checking again
+        }
+
+        // If JSON exists, read and extract issue name
+        if (file_exists($jsonPath)) {
+            $jsonData = json_decode(file_get_contents($jsonPath), true);
+
+            if (!empty($jsonData['prediction'])) {
+                return redirect()->back()->with('dont_allow_update_open', true);
+            } else {
+
+            }
+        }else{
+            return redirect()->back()->with('no_defect_modal_open', true);
+        }
 
 //        return redirect()->back()->with('no_defect_modal_open', true);
 

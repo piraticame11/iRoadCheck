@@ -22,6 +22,7 @@
                             <livewire:flash-message />
                             <livewire:review-update/>
                             <livewire:no-defect-modal/>
+                            <livewire:dont-allow-update/>
                             {{--                            <livewire:first-login-modal/>--}}
 
                             <!-- "How to Capture Road Issue" link to reopen modal -->
