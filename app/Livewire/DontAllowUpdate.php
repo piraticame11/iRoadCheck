@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class DontAllowUpdate extends Component
 {
-    public $isOpen = true;
+    public $isOpen = false;
     public function mount()
     {
         // Open modal if session exists
