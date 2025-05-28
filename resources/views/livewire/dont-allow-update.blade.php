@@ -6,7 +6,7 @@
         x-cloak
         style="display: none;"
     >
-        <div class="bg-white w-11/12 max-w-md p-8 rounded-2xl shadow-2xl relative text-center border-t-8 border-red-600">
+        <div class="bg-white w-10/12 max-w-md p-8 rounded-2xl shadow-2xl relative text-center border-t-8 border-red-600">
             <!-- Close Button -->
             <button @click="isOpen = false"
                     class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold transition">
