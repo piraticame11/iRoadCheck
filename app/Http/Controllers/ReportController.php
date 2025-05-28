@@ -427,7 +427,7 @@ class ReportController extends Controller
         $jsonPath = storage_path("app/public/temporary/update_photo_{$timestamp}.json");
 
         // Save image
-         Storage::disk('public')->put("temporary/{$imageName}", $image);
+        $imagepaths = Storage::disk('public')->put("temporary/{$imageName}", $image);
         $fullImagePath = "updates/{$imageName}";
         // Wait for the JSON file to be
         $timeout = 10; // Max wait time in seconds
