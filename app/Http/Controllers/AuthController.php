@@ -36,6 +36,12 @@ class AuthController extends Controller
         // If username is found but password is incorrect
         if ($adminUser) {
             if (Auth::attempt(['email' => $adminUser->email, 'password' => $request->password])) {
+                AdminLog::create([
+                    'admin_id' => $adminUser->id,
+                    'action' => 'Logged out.',
+                    'dateTime' => now(),
+                    'user_id' => $adminUser->id,
+                ]);
                 return redirect()->route('admin.dashboard'); // Adjust as needed
             }
 
