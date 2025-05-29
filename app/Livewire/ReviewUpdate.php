@@ -109,9 +109,8 @@ use Livewire\Component;
                 if (file_exists($jsonPath)) {
                     $jsonData = json_decode(file_get_contents($jsonPath), true);
                     if (!empty($jsonData['prediction']) && count($jsonData['prediction']) > 0) {
-
-                        dd("NOT PASSING");
-                        return redirect()->back()->with('dont_allow_update_open', true);
+                        session()->flash('dont_allow_update_open', true);
+                        $this->isOpen = false;
                     }
 
                 }else{
