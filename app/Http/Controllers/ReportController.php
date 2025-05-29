@@ -439,15 +439,7 @@ class ReportController extends Controller
         }
 
         // If JSON exists, read and extract issue name
-        if (file_exists($jsonPath)) {
-            $jsonData = json_decode(file_get_contents($jsonPath), true);
-
-            if (!empty($jsonData['prediction'])) {
-                return redirect()->back()->with('dont_allow_update_open', true);
-            } else {
-
-            }
-        }else{
+        if (!file_exists($jsonPath)) {
             return redirect()->back()->with('ai_is_off', true);
         }
 
