@@ -98,7 +98,7 @@ use Livewire\Component;
                 if (!$jsonPath){
                     dd('Could not read json file.');
                 }
-            dd("GOOD NI NA LINE");
+
                 $timeout = 10; // Max wait time in seconds
                 $startTime = time();
 
@@ -109,7 +109,7 @@ use Livewire\Component;
                 if (!file_exists($jsonPath)) {
                     return redirect()->back()->with('ai_is_off', true);
                 }
-
+            dd("GOOD NI NA LINE");
                 $jsonData = json_decode(file_get_contents($jsonPath), true);
 
                 if (!empty($jsonData['prediction'])) {
