@@ -422,7 +422,7 @@ class ReportController extends Controller
 
         // Generate filenames
         $timestamp = time();
-        $imageName = "update_photo_{$timestamp}.png";
+//        $imageName = "update_photo_{$timestamp}.png";
 //        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
         $jsonPath = storage_path("app/public/updates/update_photo_{$timestamp}.json");
         $imageName = "app/public/updates/update_photo_{$timestamp}.json";
