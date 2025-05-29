@@ -94,7 +94,7 @@ use Livewire\Component;
 
         if ($selectedStatus == "Repaired") {
 
-                $jsonPath = storage_path($temporaryUpdate->image_name);
+                $jsonPath = storage_path("{$temporaryUpdate->image_name}");
 
                 // Make sure file exists before attempting to read it
                 if (!file_exists($jsonPath)) {
