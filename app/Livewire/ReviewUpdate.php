@@ -108,12 +108,10 @@ use Livewire\Component;
                 // Make sure file exists before attempting to read it
                 if (file_exists($jsonPath)) {
                     $jsonData = json_decode(file_get_contents($jsonPath), true);
-                    dd($jsonData);
-                    if (!empty($jsonData['prediction'])) {
+                    if (!empty($jsonData['prediction']) && count($jsonData['prediction']) > 0) {
                         return redirect()->back()->with('dont_allow_update_open', true);
-                    } else {
-
                     }
+
                 }else{
                     return redirect()->back()->with('ai_is_off', true);
                 }
