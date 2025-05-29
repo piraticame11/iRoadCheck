@@ -109,13 +109,14 @@ use Livewire\Component;
                 if (file_exists($jsonPath)) {
                     $jsonData = json_decode(file_get_contents($jsonPath), true);
                     if (!empty($jsonData['prediction']) && count($jsonData['prediction']) > 0) {
+
+                        dd("NOT PASSING");
                         return redirect()->back()->with('dont_allow_update_open', true);
                     }
 
                 }else{
                     return redirect()->back()->with('ai_is_off', true);
                 }
-                dd("NOT PASSING");
         }
 
 
