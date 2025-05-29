@@ -425,6 +425,7 @@ class ReportController extends Controller
         $imageName = "update_photo_{$timestamp}.png";
 //        $annotatedPath = "update/update_photo_{$timestamp}_annotated.jpg";
         $jsonPath = storage_path("app/public/updates/update_photo_{$timestamp}.json");
+        $imageName = "app/public/updates/update_photo_{$timestamp}.json";
 
         // Save image
         $imagepaths = Storage::disk('public')->put("temporary/{$imageName}", $image);
@@ -461,6 +462,7 @@ class ReportController extends Controller
             'image' => $fullImagePath,
             'lat' => $request->latitude,
             'lng' => $request->longitude,
+            'image_name' => $imageName,
         ];
 
         if ($report) {

@@ -12,7 +12,8 @@ class TemporaryUpdate extends Model
         'time',
         'image',
         'lat',
-        'lng'
+        'lng',
+        'image_name',
     ];
     public function suggestions()
     {

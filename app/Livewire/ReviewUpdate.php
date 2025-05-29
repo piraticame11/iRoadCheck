@@ -91,6 +91,21 @@ use Livewire\Component;
             return;
         }
 
+
+        if ($selectedStatus == 'Repaired'){
+            try {
+                $jsonPath = storage_path($temporaryUpdate->image_name);
+                $jsonData = json_decode(file_get_contents($jsonPath), true);
+
+                if (!empty($jsonData['prediction'])) {
+                    return redirect()->back()->with('dont_allow_update_open', true);
+                }
+            } catch (\Exception $e) {
+
+            }
+        }
+
+
         $updateImagePath = $temporaryUpdate->image;
 
         try {
