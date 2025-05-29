@@ -99,10 +99,15 @@ use Livewire\Component;
                     dd('Could not read json file.');
                 }
 
+                $timeout = 10; // Max wait time in seconds
+                $startTime = time();
 
+                while (!file_exists($jsonPath) && (time() - $startTime) < $timeout) {
+                    usleep(500000); // Wait 0.5 seconds before checking again
+                }
                 // Make sure file exists before attempting to read it
                 if (!file_exists($jsonPath)) {
-                    return redirect()->back()->with('file_not_found', true);
+                    return redirect()->back()->with('ai_is_off', true);
                 }
 
                 $jsonData = json_decode(file_get_contents($jsonPath), true);
