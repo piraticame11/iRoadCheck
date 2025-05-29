@@ -111,7 +111,7 @@ use Livewire\Component;
                 }
 
                 $jsonData = json_decode(file_get_contents($jsonPath), true);
-            dd("GOOD NI NA LINE");
+            dd("GOOD NI NA LINE 5");
                 if (!empty($jsonData['prediction'])) {
                     return redirect()->back()->with('dont_allow_update_open', true);
                 }
