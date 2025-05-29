@@ -115,6 +115,7 @@ use Livewire\Component;
                 if (!empty($jsonData['prediction'])) {
                     return redirect()->back()->with('dont_allow_update_open', true);
                 }
+                dd("BUG DIRI5");
         }
 
 
