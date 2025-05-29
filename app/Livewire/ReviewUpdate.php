@@ -95,7 +95,7 @@ use Livewire\Component;
         if ($selectedStatus == "Repaired") {
 
                 $jsonPath = storage_path("app/public/updates/{$temporaryUpdate->image_name}");
-                if (!$jsonPath){
+                if ($jsonPath){
                     dd('Could not read json file.');
                 }
 
