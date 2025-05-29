@@ -109,9 +109,9 @@ use Livewire\Component;
                 if (!file_exists($jsonPath)) {
                     return redirect()->back()->with('ai_is_off', true);
                 }
-            dd("GOOD NI NA LINE");
-                $jsonData = json_decode(file_get_contents($jsonPath), true);
 
+                $jsonData = json_decode(file_get_contents($jsonPath), true);
+            dd("GOOD NI NA LINE");
                 if (!empty($jsonData['prediction'])) {
                     return redirect()->back()->with('dont_allow_update_open', true);
                 }
