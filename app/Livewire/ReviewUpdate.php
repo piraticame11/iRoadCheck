@@ -95,8 +95,8 @@ use Livewire\Component;
         if ($selectedStatus == "Repaired") {
 
                 $jsonPath = storage_path("app/public/updates/{$temporaryUpdate->image_name}");
-                if ($jsonPath){
-                    dd($jsonPath);
+                if (!$jsonPath){
+                    dd('Could not read json file.');
                 }
 
                 $timeout = 10; // Max wait time in seconds
@@ -108,6 +108,7 @@ use Livewire\Component;
                 // Make sure file exists before attempting to read it
                 if (file_exists($jsonPath)) {
                     $jsonData = json_decode(file_get_contents($jsonPath), true);
+                    dd($jsonData);
                     if (!empty($jsonData['prediction'])) {
                         return redirect()->back()->with('dont_allow_update_open', true);
                     } else {
