@@ -115,6 +115,7 @@ use Livewire\Component;
                 }else{
                     return redirect()->back()->with('ai_is_off', true);
                 }
+                dd("NOT PASSING");
         }
 
 
