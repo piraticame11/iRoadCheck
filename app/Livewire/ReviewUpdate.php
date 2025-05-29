@@ -93,12 +93,12 @@ use Livewire\Component;
 
 
         if ($selectedStatus == "Repaired") {
-            dd("GOOD NI NA LINE");
+
                 $jsonPath = storage_path("app/public/updates/{$temporaryUpdate->image_name}");
                 if (!$jsonPath){
                     dd('Could not read json file.');
                 }
-
+            dd("GOOD NI NA LINE");
                 $timeout = 10; // Max wait time in seconds
                 $startTime = time();
 
