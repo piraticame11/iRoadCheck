@@ -96,7 +96,7 @@ use Livewire\Component;
 
                 $jsonPath = storage_path("app/public/updates/{$temporaryUpdate->image_name}");
                 if ($jsonPath){
-                    dd('Could not read json file.');
+                    dd($jsonPath);
                 }
 
                 $timeout = 10; // Max wait time in seconds
