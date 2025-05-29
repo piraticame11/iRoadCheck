@@ -93,8 +93,13 @@ use Livewire\Component;
 
 
         if ($selectedStatus == "Repaired") {
-
+            try {
                 $jsonPath = storage_path("{$temporaryUpdate->image_name}");
+            }
+            catch (\Exception $e) {
+                dd("STORAGE PATH CANT BE SEEN");
+            }
+
 
                 // Make sure file exists before attempting to read it
                 if (!file_exists($jsonPath)) {
